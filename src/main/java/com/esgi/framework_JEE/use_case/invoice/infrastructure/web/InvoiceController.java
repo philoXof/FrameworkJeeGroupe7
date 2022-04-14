@@ -1,7 +1,6 @@
 package com.esgi.framework_JEE.use_case.invoice.infrastructure.web;
 
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
-import com.esgi.framework_JEE.use_case.invoice.domain.InvoiceId;
 import com.esgi.framework_JEE.use_case.invoice.domain.InvoiceService;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
 import org.springframework.http.HttpStatus;
@@ -54,8 +53,7 @@ public class InvoiceController {
 
     @GetMapping("/{id}")
     public ResponseEntity<InvoiceResponse> getById(@PathVariable String id){
-        var invoiceId = new InvoiceId(id);
-        var invoice = invoiceService.getById(invoiceId);
+        var invoice = invoiceService.getById(id);
 
         return new ResponseEntity<>(toResponse(invoice), HttpStatus.FOUND);
     }
@@ -78,8 +76,7 @@ public class InvoiceController {
         // 2 - Supprimer l'id de la facture dans les produits
 
 
-        var invoiceId = new InvoiceId(id);
-        invoiceService.delete(invoiceId);
+        invoiceService.delete(id);
 
         return new ResponseEntity<>("Invoice deleted", HttpStatus.OK);
     }
