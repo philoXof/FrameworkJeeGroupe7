@@ -1,6 +1,6 @@
-package com.esgi.framework_JEE.junit;
-import com.esgi.framework_JEE.use_case.User.Domain.entities.User;
-import com.esgi.framework_JEE.use_case.User.validation.UserValidationService;
+package com.esgi.framework_JEE.web.junit;
+import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.validation.UserValidationService;
 import org.junit.Before;
 import org.junit.Test;
 

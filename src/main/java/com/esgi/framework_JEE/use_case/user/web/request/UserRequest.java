@@ -1,4 +1,4 @@
-package com.esgi.framework_JEE.use_case.User.web.request;
+package com.esgi.framework_JEE.use_case.user.web.request;
 
 
 

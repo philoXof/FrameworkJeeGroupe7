@@ -1,11 +1,11 @@
-package com.esgi.framework_JEE.use_case.User.command;
+package com.esgi.framework_JEE.use_case.user.command;
 
 
 
-import com.esgi.framework_JEE.use_case.User.Domain.entities.User;
-import com.esgi.framework_JEE.use_case.User.Domain.repository.UserRepository;
-import com.esgi.framework_JEE.use_case.User.validation.UserValidationService;
-import com.esgi.framework_JEE.use_case.User.web.request.UserRequest;
+import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.repository.UserRepository;
+import com.esgi.framework_JEE.use_case.user.validation.UserValidationService;
+import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,10 @@
-package com.esgi.framework_JEE.use_case.User.web.controller;
+package com.esgi.framework_JEE.use_case.user.web.controller;
 
-import com.esgi.framework_JEE.use_case.User.Domain.entities.User;
-import com.esgi.framework_JEE.use_case.User.command.UserCommand;
-import com.esgi.framework_JEE.use_case.User.query.UserQuery;
-import com.esgi.framework_JEE.use_case.User.validation.UserValidationService;
-import com.esgi.framework_JEE.use_case.User.web.request.UserRequest;
+import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.command.UserCommand;
+import com.esgi.framework_JEE.use_case.user.query.UserQuery;
+import com.esgi.framework_JEE.use_case.user.validation.UserValidationService;
+import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,10 +35,9 @@ public class UserController {
         String email = userRequest.email;
         String firstname = userRequest.firstname;
         String lastname = userRequest.lastname;
-        String profilePicture = userRequest.profilePicture;
 
-        if(password == null || email == null || profilePicture == null || lastname == null || firstname == null ||
-        password.equals("") || email.equals("") || profilePicture.equals("") || lastname.equals("") || firstname.equals(""))
+        if(password == null || email == null || lastname == null || firstname == null ||
+        password.equals("") || email.equals("") || lastname.equals("") || firstname.equals(""))
             return new ResponseEntity<>("Missing properties", HttpStatus.BAD_REQUEST);
 
         if(userQuery.userEmailExist(userRequest.email))
