@@ -5,12 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InvoiceRepository extends JpaRepository<Invoice, String> {
+public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 
     //TODO : Create ???
 
-    Invoice getInvoiceById(String id);
+    Invoice getInvoiceById(int id);
 
-    void deleteInvoiceById(String id);
+
+    void deleteInvoiceById(int id);
+
 
 }

@@ -22,7 +22,7 @@ public class InvoiceService {
         return invoice;
     }
 
-    public Invoice getById(String id){
+    public Invoice getById(int id){
         return invoiceRepository.getInvoiceById(id);
     }
 
@@ -30,7 +30,7 @@ public class InvoiceService {
         return invoiceRepository.findAll();
     }
 
-    public void delete(String id){
-        invoiceRepository.deleteInvoiceById(id);
+    public void delete(int id){
+        invoiceRepository.deleteById(id);
     }
 }

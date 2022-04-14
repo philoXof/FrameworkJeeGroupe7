@@ -30,13 +30,12 @@ public class InvoiceController {
 
         return ResponseEntity.created(
                 linkTo(
-                        methodOn(InvoiceController.class).getById(invoiceCreated.getId().toString())
+                        methodOn(InvoiceController.class).getById(invoiceCreated.getId())
                 ).toUri()
         ).build();
     }
 
     /*
-
     @PostMapping("/generate")
     public ResponseEntity<Invoice> generateInvoice(@RequestBody List<String> productIdList){
         //for (String productId: productIdList) {
@@ -47,12 +46,11 @@ public class InvoiceController {
 
         //return laListe
     }
-
     */
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<InvoiceResponse> getById(@PathVariable String id){
+    public ResponseEntity<InvoiceResponse> getById(@PathVariable int id){
         var invoice = invoiceService.getById(id);
 
         return new ResponseEntity<>(toResponse(invoice), HttpStatus.FOUND);
@@ -69,12 +67,16 @@ public class InvoiceController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable String id){
+    public ResponseEntity<String> deleteById(@PathVariable int id){
+
+        var invoiceToDelete = invoiceService.getById(id);
+        if(invoiceToDelete == null){
+            return new ResponseEntity<>(" Invoice not found", HttpStatus.NOT_FOUND);
+        }
 
         //TODO :
         // 1 - Chercher tous les produits de la factures (getAllProductByInvoiceId)
         // 2 - Supprimer l'id de la facture dans les produits
-
 
         invoiceService.delete(id);
 

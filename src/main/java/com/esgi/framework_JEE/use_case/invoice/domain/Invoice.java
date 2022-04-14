@@ -13,7 +13,7 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
-    private String id;
+    private int id;
     @Column(name = "amount")
     private Double amount;
 
@@ -26,11 +26,11 @@ public class Invoice {
 
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public Invoice setId(String id) {
+    public Invoice setId(int id) {
         this.id = id;
         return this;
     }
