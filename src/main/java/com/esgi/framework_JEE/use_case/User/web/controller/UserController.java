@@ -35,10 +35,9 @@ public class UserController {
         String email = userRequest.email;
         String firstname = userRequest.firstname;
         String lastname = userRequest.lastname;
-        String profilePicture = userRequest.profilePicture;
 
-        if(password == null || email == null || profilePicture == null || lastname == null || firstname == null ||
-        password.equals("") || email.equals("") || profilePicture.equals("") || lastname.equals("") || firstname.equals(""))
+        if(password == null || email == null ||  lastname == null || firstname == null ||
+        password.equals("") || email.equals("") ||  lastname.equals("") || firstname.equals(""))
             return new ResponseEntity<>("Missing properties", HttpStatus.BAD_REQUEST);
 
         if(userQuery.userEmailExist(userRequest.email))

@@ -1,5 +1,7 @@
 package com.esgi.framework_JEE.use_case.invoice.domain;
 
+import com.esgi.framework_JEE.use_case.User.Domain.entities.User;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,6 +19,10 @@ public class Invoice {
 
     @Column(name = "creationDate")
     private Date creationDate;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 
