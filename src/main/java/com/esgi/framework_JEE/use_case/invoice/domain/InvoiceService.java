@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.use_case.invoice.domain;
 
+import com.esgi.framework_JEE.use_case.User.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.repository.InvoiceRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,20 @@ public class InvoiceService {
         this.invoiceRepository = invoiceRepository;
     }
 
-    public Invoice create(){
+    public Invoice createEmpty(){
         var invoice = new Invoice().setAmount(0.0).setCreationDate(new Date());
         invoiceRepository.save(invoice);
 
+        return invoice;
+    }
+
+    public Invoice generateWithUser(User user){
+        var invoice = new Invoice()
+                .setAmount(0.0)
+                .setCreationDate(new Date())
+                .setUser(user);
+
+        invoiceRepository.save(invoice);
         return invoice;
     }
 

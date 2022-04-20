@@ -52,4 +52,13 @@ public class Invoice {
         this.creationDate = creationDate;
         return this;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Invoice setUser(User user) {
+        this.user = user;
+        return this;
+    }
 }

@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.use_case.invoice.infrastructure.web;
 
+import com.esgi.framework_JEE.use_case.User.query.UserQuery;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.domain.InvoiceService;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
@@ -18,15 +19,17 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class InvoiceController {
 
     private final InvoiceService invoiceService;
+    private final UserQuery userQuery;
 
-    public InvoiceController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService, UserQuery userQuery) {
         this.invoiceService = invoiceService;
+        this.userQuery = userQuery;
     }
 
 
     @PostMapping
     public ResponseEntity<?> create(){
-        var invoiceCreated = invoiceService.create();
+        var invoiceCreated = invoiceService.createEmpty();
 
         return ResponseEntity.created(
                 linkTo(
@@ -35,18 +38,23 @@ public class InvoiceController {
         ).build();
     }
 
-    /*
-    @PostMapping("/generate")
-    public ResponseEntity<Invoice> generateInvoice(@RequestBody List<String> productIdList){
-        //for (String productId: productIdList) {
-            //est ce que l'id existe
-        //}
 
-        //créer une facture par ID
+    @PostMapping("/generate/{user_id}")
+    public ResponseEntity<?> generateInvoice(@PathVariable int user_id){
+        var user = userQuery.getById(user_id);
+        if(user == null){
+            return new ResponseEntity<>(" User not found", HttpStatus.NOT_FOUND);
+        }
 
-        //return laListe
+        var invoiceCreated = invoiceService.generateWithUser(user);
+
+        return ResponseEntity.created(
+                linkTo(
+                        methodOn(InvoiceController.class).getById(invoiceCreated.getId())
+                ).toUri()
+        ).build();
     }
-    */
+
 
 
     @GetMapping("/{id}")

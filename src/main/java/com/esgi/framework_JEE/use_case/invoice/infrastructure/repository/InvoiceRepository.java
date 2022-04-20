@@ -6,13 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
-
-    //TODO : Create ???
-
     Invoice getInvoiceById(int id);
-
-
-    void deleteInvoiceById(int id);
 
 
 }
