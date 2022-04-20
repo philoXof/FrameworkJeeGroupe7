@@ -1,7 +1,7 @@
 package com.esgi.framework_JEE.use_case.invoice.domain;
 
-import com.esgi.framework_JEE.use_case.User.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.repository.InvoiceRepository;
+import com.esgi.framework_JEE.use_case.user.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

@@ -1,9 +1,9 @@
 package com.esgi.framework_JEE.use_case.invoice.infrastructure.web;
 
-import com.esgi.framework_JEE.use_case.User.query.UserQuery;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.domain.InvoiceService;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
+import com.esgi.framework_JEE.use_case.user.query.UserQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,7 @@
 package com.esgi.framework_JEE.use_case.product.entities;
 
 import com.esgi.framework_JEE.use_case.basket.entities.Basket;
+import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import lombok.Getter;
 import lombok.Setter;
 
