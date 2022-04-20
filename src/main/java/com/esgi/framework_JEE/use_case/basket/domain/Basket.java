@@ -1,13 +1,9 @@
 package com.esgi.framework_JEE.use_case.basket.domain;
 
-import com.esgi.framework_JEE.use_case.product.entities.Product;
-import lombok.Getter;
-import lombok.Setter;
+import com.esgi.framework_JEE.use_case.user.entities.User;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "basket")
 public class Basket {
@@ -18,4 +14,26 @@ public class Basket {
             updatable = false
     )
     private int id;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public Basket setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Basket setUser(User user) {
+        this.user = user;
+        return this;
+    }
 }
