@@ -1,4 +1,4 @@
-package com.esgi.framework_JEE.use_case.basket.entities;
+package com.esgi.framework_JEE.use_case.basket.domain;
 
 import com.esgi.framework_JEE.use_case.product.entities.Product;
 import lombok.Getter;
