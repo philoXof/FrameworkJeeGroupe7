@@ -36,6 +36,7 @@ public class UserController {
         String firstname = userRequest.firstname;
         String lastname = userRequest.lastname;
 
+
         if(password == null || email == null || lastname == null || firstname == null ||
         password.equals("") || email.equals("") || lastname.equals("") || firstname.equals(""))
             return new ResponseEntity<>("Missing properties", HttpStatus.BAD_REQUEST);
