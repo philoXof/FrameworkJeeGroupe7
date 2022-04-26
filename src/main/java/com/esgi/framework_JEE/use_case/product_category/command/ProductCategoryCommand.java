@@ -1,6 +1,6 @@
 package com.esgi.framework_JEE.use_case.product_category.command;
 
-import com.esgi.framework_JEE.use_case.product_category.domain.entities.entities.ProductCategory;
+import com.esgi.framework_JEE.use_case.product_category.domain.entities.ProductCategory;
 import com.esgi.framework_JEE.use_case.product_category.domain.repository.ProductCategoryRepository;
 import com.esgi.framework_JEE.use_case.product_category.validation.ProductCategoryValidation;
 import com.esgi.framework_JEE.use_case.product_category.web.request.ProductCategoryRequest;

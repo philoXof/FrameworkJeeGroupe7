@@ -1,4 +1,4 @@
-package com.esgi.framework_JEE.use_case.product_category.domain.entities.entities;
+package com.esgi.framework_JEE.use_case.product_category.domain.entities;
 
 import lombok.Getter;
 import lombok.Setter;

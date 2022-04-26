@@ -1,6 +1,6 @@
 package com.esgi.framework_JEE.use_case.product_category.query;
 
-import com.esgi.framework_JEE.use_case.product_category.domain.entities.entities.ProductCategory;
+import com.esgi.framework_JEE.use_case.product_category.domain.entities.ProductCategory;
 import com.esgi.framework_JEE.use_case.product_category.domain.repository.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.esgi.framework_JEE.use_case.product_category.web.controller;
 
 import com.esgi.framework_JEE.use_case.product_category.command.ProductCategoryCommand;
-import com.esgi.framework_JEE.use_case.product_category.domain.entities.entities.ProductCategory;
+import com.esgi.framework_JEE.use_case.product_category.domain.entities.ProductCategory;
 import com.esgi.framework_JEE.use_case.product_category.query.ProductCategoryQuery;
 import com.esgi.framework_JEE.use_case.product_category.web.request.ProductCategoryRequest;
 import com.esgi.framework_JEE.use_case.product_category.web.response.ProductCategoryResponse;
