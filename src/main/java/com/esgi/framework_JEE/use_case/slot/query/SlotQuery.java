@@ -25,7 +25,7 @@ public class SlotQuery {
         return slotRepository.findAll();
     }
 
-    public List<Slot> findByStart(Date start){
-        return slotRepository.findAllByStart(start);
+    public List<Slot> findByStartSlot(Date start){
+        return slotRepository.findAllByStartSlot(start);
     }
 }
