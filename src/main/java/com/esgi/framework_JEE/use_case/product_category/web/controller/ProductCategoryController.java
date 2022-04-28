@@ -30,7 +30,7 @@ public class ProductCategoryController {
         this.productCategoryQuery = productCategoryQuery;
     }
 
-    //todo test all
+
     @PostMapping("/create")
     public ResponseEntity<ProductCategoryResponse> create(@RequestBody ProductCategoryRequest productCategoryRequest){
         var productCategory = productCategoryCommand.create(productCategoryRequest);
@@ -74,7 +74,7 @@ public class ProductCategoryController {
         if(productCategory == null)
             return new ResponseEntity<>(
                     "ProductCategory " + productCategoryId + " not exist",
-                    HttpStatus.BAD_REQUEST
+                    HttpStatus.OK
             );
         productCategoryCommand.delete(productCategoryId);
         return new ResponseEntity<>(

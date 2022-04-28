@@ -35,6 +35,8 @@ public class ProductCategoryCommand {
 
     public void delete(int productCategoryId){
         Optional<ProductCategory> dbProductCategory = Optional.ofNullable(productCategoryRepository.findById(productCategoryId));
-        dbProductCategory.ifPresent(productCategory -> delete(productCategoryId));
+        dbProductCategory.ifPresent(
+                productCategory -> productCategoryRepository.delete(productCategory)
+        );
     }
 }
