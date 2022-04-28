@@ -11,5 +11,5 @@ import java.util.List;
 public interface SlotRepository extends JpaRepository<Slot,Integer> {
     Slot findById(int id);
 
-    List<Slot> findAllByStart(Date start);
+    List<Slot> findAllByStartSlot(Date start);
 }
