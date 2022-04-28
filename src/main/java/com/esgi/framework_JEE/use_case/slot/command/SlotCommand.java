@@ -19,8 +19,8 @@ public class SlotCommand {
 
     public Slot create(SlotRequest slotRequest){
         var slot = new Slot();
-        slot.setStart(slotRequest.start);
-        slot.setEnd(slotRequest.end);
+        slot.setStartSlot(slotRequest.start);
+        slot.setEndSlot(slotRequest.end);
         if(slotValidationService.isValid(slot))
             return slotRepository.save(slot);
         return null;
@@ -30,7 +30,7 @@ public class SlotCommand {
     public Slot changeStart(int id,SlotRequest request){
         Optional<Slot> dbSlot = Optional.ofNullable(slotRepository.findById(id));
         if(dbSlot.isPresent()){
-            dbSlot.get().setStart(request.start);
+            dbSlot.get().setStartSlot(request.start);
             if(slotValidationService.isValid(dbSlot.get()))
                 return slotRepository.save(dbSlot.get());
         }
@@ -40,7 +40,7 @@ public class SlotCommand {
     public Slot changeEnd(int id,SlotRequest request){
         Optional<Slot> dbSlot = Optional.ofNullable(slotRepository.findById(id));
         if(dbSlot.isPresent()){
-            dbSlot.get().setEnd(request.end);
+            dbSlot.get().setEndSlot(request.end);
             if(slotValidationService.isValid(dbSlot.get()))
                 return slotRepository.save(dbSlot.get());
         }
