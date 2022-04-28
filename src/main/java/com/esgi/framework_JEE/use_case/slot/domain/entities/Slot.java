@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.use_case.slot.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,9 +20,11 @@ public class Slot {
     )
     private int id;
 
-    @Column(name = "start")
-    private Date start;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Column(name = "start_slot")
+    private Date startSlot;
 
-    @Column(name = "end")
-    private Date end;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Column(name = "end_slot")
+    private Date endSlot;
 }
