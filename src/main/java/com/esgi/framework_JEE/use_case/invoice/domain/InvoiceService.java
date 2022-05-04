@@ -17,7 +17,9 @@ public class InvoiceService {
     }
 
     public Invoice createEmpty(){
-        var invoice = new Invoice().setAmount(0.0).setCreationDate(new Date());
+        var invoice = new Invoice()
+                .setAmount(0.0)
+                .setCreationDate(new Date());
         invoiceRepository.save(invoice);
 
         return invoice;

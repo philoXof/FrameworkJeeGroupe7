@@ -93,8 +93,14 @@ public class InvoiceController {
 
 
     private InvoiceResponse toResponse(Invoice invoice){
-        return new InvoiceResponse()
+        var invoiceResponse =  new InvoiceResponse()
                 .setAmount(invoice.getAmount())
                 .setCreationDate(invoice.getCreationDate());
+
+        if(invoice.getUser() != null) {
+            invoiceResponse.setUser_id(invoice.getUser().getId());
+        }
+
+        return invoiceResponse;
     }
 }

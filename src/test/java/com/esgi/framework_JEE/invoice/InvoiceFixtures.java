@@ -17,9 +17,8 @@ public class InvoiceFixtures {
     public static Response generateInvoice(int user_id){
         return given()
                 .contentType(ContentType.JSON)
-                .queryParam(String.valueOf(user_id))
                 .when()
-                .post("/api/v1/invoice/generate/");
+                .post("/api/v1/invoice/generate/" + user_id);
     }
 
 }
