@@ -2,7 +2,7 @@ package com.esgi.framework_JEE.use_case.user.command;
 
 
 
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.user.Domain.repository.UserRepository;
 import com.esgi.framework_JEE.use_case.user.query.UserQuery;
 import com.esgi.framework_JEE.use_case.user.validation.UserValidationService;
@@ -10,7 +10,6 @@ import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 @Service
 public final class UserCommand {

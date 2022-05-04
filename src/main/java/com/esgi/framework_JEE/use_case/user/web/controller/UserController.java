@@ -1,6 +1,6 @@
 package com.esgi.framework_JEE.use_case.user.web.controller;
 
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.user.command.UserCommand;
 import com.esgi.framework_JEE.use_case.user.query.UserQuery;
 import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
