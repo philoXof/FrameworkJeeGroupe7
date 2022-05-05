@@ -4,6 +4,7 @@ import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.domain.InvoiceService;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
 import com.esgi.framework_JEE.use_case.user.query.UserQuery;
+import com.sun.istack.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,6 @@ public class InvoiceController {
         ).build();
     }
 
-
     @PostMapping("/generate/{user_id}")
     public ResponseEntity<?> generateInvoice(@PathVariable int user_id){
         var user = userQuery.getById(user_id);
@@ -57,13 +57,30 @@ public class InvoiceController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<InvoiceResponse> getById(@PathVariable int id){
+    public ResponseEntity<InvoiceResponse> getById(@PathVariable @NotNull int id){
         var invoice = invoiceService.getById(id);
 
         return new ResponseEntity<>(toResponse(invoice), HttpStatus.FOUND);
     }
 
-    //TODO: Get Invoices By user_id
+    @GetMapping("/user/{user_id}")
+    public ResponseEntity<?> getByUserId(@PathVariable int user_id){
+        var user = userQuery.getById(user_id);
+        if(user == null){
+            return new ResponseEntity<>(" User not found", HttpStatus.NOT_FOUND);
+        }
+
+        var invoiceResponses = invoiceService.getByUserId(user);
+        if(invoiceResponses.isEmpty()){
+            return new ResponseEntity<>("Not Invoice found for this user", HttpStatus.NOT_FOUND);
+        }
+
+        var response = invoiceResponses.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping
     public ResponseEntity<List<InvoiceResponse>> getAll(){
@@ -71,6 +88,7 @@ public class InvoiceController {
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
+
 
         return ResponseEntity.ok(invoiceResponses);
     }

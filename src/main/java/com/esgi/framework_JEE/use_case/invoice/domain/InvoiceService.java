@@ -39,6 +39,10 @@ public class InvoiceService {
         return invoiceRepository.getInvoiceById(id);
     }
 
+    public List<Invoice> getByUserId(User user){
+        return invoiceRepository.getInvoicesByUser(user);
+    }
+
     public List<Invoice> getAll(){
         return invoiceRepository.findAll();
     }
