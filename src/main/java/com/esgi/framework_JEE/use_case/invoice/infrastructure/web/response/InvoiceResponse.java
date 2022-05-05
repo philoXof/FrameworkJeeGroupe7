@@ -1,7 +1,5 @@
 package com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response;
 
-import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
-import com.esgi.framework_JEE.use_case.user.entities.User;
 
 import java.util.Date;
 

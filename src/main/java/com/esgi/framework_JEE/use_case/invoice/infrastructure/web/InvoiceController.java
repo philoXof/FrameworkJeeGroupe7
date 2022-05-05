@@ -56,13 +56,14 @@ public class InvoiceController {
     }
 
 
-
     @GetMapping("/{id}")
     public ResponseEntity<InvoiceResponse> getById(@PathVariable int id){
         var invoice = invoiceService.getById(id);
 
         return new ResponseEntity<>(toResponse(invoice), HttpStatus.FOUND);
     }
+
+    //TODO: Get Invoices By user_id
 
     @GetMapping
     public ResponseEntity<List<InvoiceResponse>> getAll(){

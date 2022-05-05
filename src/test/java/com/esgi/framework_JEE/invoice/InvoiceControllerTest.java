@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 
-import java.util.List;
+import java.util.*;
 
 import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +35,9 @@ public class InvoiceControllerTest {
     @Test
     public void shouldGenerateInvoiceWithUserId(){
 
-        var location = InvoiceFixtures.generateInvoice(1)
+        int user_id = 1;
+
+        var location = InvoiceFixtures.generateInvoice(user_id)
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
@@ -46,7 +48,7 @@ public class InvoiceControllerTest {
                 .statusCode(302)
                 .extract().body().jsonPath().getObject(".", InvoiceResponse.class);
 
-        assertThat(invoiceResponse.getUser_id()).isEqualTo(1);
+        assertThat(invoiceResponse.getUser_id()).isEqualTo(user_id);
     }
 
 
@@ -60,12 +62,12 @@ public class InvoiceControllerTest {
                 .extract().body().jsonPath().getObject(".",  new TypeRef<List<Invoice>>() {});
 
 
-        var location1 = InvoiceFixtures.create()
+        InvoiceFixtures.create()
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
 
-        var location2 = InvoiceFixtures.create()
+        InvoiceFixtures.create()
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
@@ -83,28 +85,18 @@ public class InvoiceControllerTest {
     @Test
     public void shouldDeleteInvoice(){
 
-        var invoicesInDatabaseBefore = when()
-                .get("/api/v1/invoice")
+        var locationInvoiceCreated = InvoiceFixtures.create()
                 .then()
-                .statusCode(200)
-                .extract().body().jsonPath().getObject(".",  new TypeRef<List<Invoice>>() {});
+                .statusCode(201)
+                .extract().header("Location");
 
-
-        var invoiceDelete = when()
-                .delete("/api/v1/invoice/1")
+        when()
+                .delete(locationInvoiceCreated)
                 .then()
                 .statusCode(200);
-
-
-        var invoices = when()
-                .get("/api/v1/invoice")
-                .then()
-                .statusCode(200)
-                .extract()
-                .body().jsonPath().getObject(".", new TypeRef<List<Invoice>>() {});
-
-        assertThat(invoices).hasSize(invoicesInDatabaseBefore.size() - 1);
     }
+
+
 
 
 }
