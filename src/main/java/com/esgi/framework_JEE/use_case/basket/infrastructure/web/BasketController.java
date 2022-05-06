@@ -78,6 +78,19 @@ public class BasketController {
         return ResponseEntity.ok(basketResponses);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable int id){
+
+        var basketToDelete = basketService.getById(id);
+        if(basketToDelete == null){
+            return new ResponseEntity<>(" Basket not found", HttpStatus.NOT_FOUND);
+        }
+
+        basketService.delete(id);
+
+        return new ResponseEntity<>("Basket deleted", HttpStatus.OK);
+    }
+
     
     private BasketResponse toResponse(Basket basket){
         return new BasketResponse()
