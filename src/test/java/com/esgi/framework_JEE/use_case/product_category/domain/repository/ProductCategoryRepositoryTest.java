@@ -23,15 +23,15 @@ class ProductCategoryRepositoryTest {
 
     @Test
     public void should_find_empty() {
-        var tutorials = productCategoryRepository.findAll();
-        assertThat(tutorials).isEmpty();
+        var pc = productCategoryRepository.findAll();
+        assertThat(pc).isEmpty();
     }
 
 
     @Test
     public void should_find_no_productCategory_if_repository_is_empty() {
-        var tutorials = productCategoryRepository.findAll();
-        assertThat(tutorials).size().isEqualTo(0);
+        var pc = productCategoryRepository.findAll();
+        assertThat(pc).size().isEqualTo(0);
     }
 
     @Test
@@ -55,10 +55,10 @@ class ProductCategoryRepositoryTest {
 
     @Test
     public void should_find_ProductCategory_by_id() {
-        var tut1 = new ProductCategory();
-        entityManager.persist(tut1);
-        var tut2 = new ProductCategory();
-        var pc2created = entityManager.persist(tut2);
+        var pc1 = new ProductCategory();
+        entityManager.persist(pc1);
+        var pc2 = new ProductCategory();
+        var pc2created = entityManager.persist(pc2);
         var dbPc = productCategoryRepository.findById(pc2created.getId());
         assertThat(dbPc).isEqualTo(pc2created);
     }
