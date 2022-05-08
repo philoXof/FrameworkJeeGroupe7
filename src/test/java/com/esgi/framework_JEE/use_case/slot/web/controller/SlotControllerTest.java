@@ -83,7 +83,7 @@ public class SlotControllerTest {
         /*
          * PATCH (change end slotRequest)
          */
-        slotRequest.end = "08/05/2022 10:00";
+        slotRequest.end = "08/05/2022 12:00";
         var updatedEndSlotResponse = SlotFixtures.changeSlotEnd(id,slotRequest)
                 .then()
                 .statusCode(200)
