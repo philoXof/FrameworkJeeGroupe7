@@ -9,11 +9,12 @@ import java.util.Date;
 public class SlotValidationService {
 
     public boolean isValid(Slot slot) throws ParseException {
+        if(slot.getEndSlot() == null || slot.getStartSlot() == null)
+            return false;
         var end = DateManipulator.stringToDate(slot.getEndSlot());
         var start = DateManipulator.stringToDate(slot.getStartSlot());
 
-        if(end == null || start == null)
-            return false;
+
 
         if(end.before(start))
             return false;
