@@ -3,9 +3,9 @@ package com.esgi.framework_JEE.use_case.slot.domain.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -20,11 +20,14 @@ public class Slot {
     )
     private int id;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @Column(name = "start_slot")
-    private Date startSlot;
+    private String startSlot;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @Column(name = "end_slot")
-    private Date endSlot;
+    private String endSlot;
+
 }
