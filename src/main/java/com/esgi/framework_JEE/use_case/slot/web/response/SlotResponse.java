@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class SlotResponse {
     public int id;
-    public Date start;
-    public Date end;
+    public String start;
+    public String end;
 
     public SlotResponse() {
     }
@@ -19,20 +19,20 @@ public class SlotResponse {
         return this;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public SlotResponse setStart(Date start) {
+    public SlotResponse setStart(String start) {
         this.start = start;
         return this;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public SlotResponse setEnd(Date end) {
+    public SlotResponse setEnd(String end) {
         this.end = end;
         return this;
     }

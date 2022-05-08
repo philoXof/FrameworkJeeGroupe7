@@ -36,7 +36,7 @@ public class ProductCategoryController {
         var productCategory = productCategoryCommand.create(productCategoryRequest);
         if(productCategory == null)
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(productCategoryToProductCategoryResponse(productCategory),HttpStatus.OK);
+        return new ResponseEntity<>(productCategoryToProductCategoryResponse(productCategory),HttpStatus.CREATED);
     }
 
     @GetMapping("/")
@@ -74,12 +74,12 @@ public class ProductCategoryController {
         if(productCategory == null)
             return new ResponseEntity<>(
                     "ProductCategory " + productCategoryId + " not exist",
-                    HttpStatus.OK
+                    HttpStatus.BAD_REQUEST
             );
         productCategoryCommand.delete(productCategoryId);
         return new ResponseEntity<>(
                 "ProductCategory " + productCategoryId + " deleted",
-                HttpStatus.BAD_REQUEST
+                HttpStatus.OK
         );
     }
 

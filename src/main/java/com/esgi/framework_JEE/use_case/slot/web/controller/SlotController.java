@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +32,11 @@ public class SlotController {
 
     
     @PostMapping("/create")
-    public ResponseEntity<SlotResponse> create(@RequestBody SlotRequest slotRequest){
+    public ResponseEntity<SlotResponse> create(@RequestBody SlotRequest slotRequest) throws ParseException {
         var slot = slotCommand.create(slotRequest);
         if(slot == null)
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(slotToSlotResponse(slot),HttpStatus.OK);
+        return new ResponseEntity<>(slotToSlotResponse(slot),HttpStatus.CREATED);
     }
 
     @GetMapping("/")
@@ -58,9 +59,17 @@ public class SlotController {
         );
     }
 
-    @PatchMapping("/{slotId}")
-    public ResponseEntity<SlotResponse> changeStart(@PathVariable int slotId,@RequestBody SlotRequest slotRequest){
+    @PatchMapping("/start/{slotId}")
+    public ResponseEntity<SlotResponse> changeStart(@PathVariable int slotId,@RequestBody SlotRequest slotRequest) throws ParseException {
         var slot = slotCommand.changeStart(slotId,slotRequest);
+        if(slot == null)
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(slotToSlotResponse(slot), HttpStatus.OK);
+    }
+
+    @PatchMapping("/end/{slotId}")
+    public ResponseEntity<SlotResponse> changeEnd(@PathVariable int slotId,@RequestBody SlotRequest slotRequest) throws ParseException {
+        var slot = slotCommand.changeEnd(slotId,slotRequest);
         if(slot == null)
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(slotToSlotResponse(slot), HttpStatus.OK);
@@ -78,7 +87,7 @@ public class SlotController {
         slotCommand.delete(slotId);
         return new ResponseEntity<>(
                 "Slot " + slotId + " deleted",
-                HttpStatus.BAD_REQUEST
+                HttpStatus.OK
         );
     }
 
