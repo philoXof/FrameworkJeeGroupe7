@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.esgi</groupId>
-	<artifactId>api_project_annuel</artifactId>
+	<artifactId>framework_jee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>api_project_annuel</name>
+	<name>framework_jee</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
