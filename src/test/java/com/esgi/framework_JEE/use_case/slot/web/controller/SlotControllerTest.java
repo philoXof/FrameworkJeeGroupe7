@@ -106,6 +106,17 @@ public class SlotControllerTest {
 
         assertThat(updatedSlotResponse).isEqualTo("");
 
+        /*
+         * PATCH (change start slotRequest) (return 400, start cannot be after end)
+         */
+        slotRequest.end = "09/05/2012 11:00";
+        var updatedSlotResponse2 = SlotFixtures.changeSlotEnd(id,slotRequest)
+                .then()
+                .statusCode(400)
+                .extract().body().asString();
+
+
+        assertThat(updatedSlotResponse2).isEqualTo("");
 
         /*
          * delete
