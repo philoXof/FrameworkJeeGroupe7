@@ -24,6 +24,11 @@ public class SlotController {
     @Autowired
     SlotQuery slotQuery;
 
+    /*
+    todo
+        get by start slot
+        gte by day maybe ? a voir plus tard
+     */
 
     public SlotController(SlotCommand slotCommand, SlotQuery slotQuery) {
         this.slotCommand = slotCommand;

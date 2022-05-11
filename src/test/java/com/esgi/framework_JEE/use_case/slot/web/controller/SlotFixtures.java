@@ -23,6 +23,13 @@ public class SlotFixtures {
                 .get("/slot/" + slotId);
     }
 
+    public static Response getAll(){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/slot/");
+    }
+
 
     public static Response changeSlotStart(int slotId, SlotRequest slotRequest){
         return given()

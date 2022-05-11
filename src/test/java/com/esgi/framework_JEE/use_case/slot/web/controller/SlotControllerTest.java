@@ -96,16 +96,16 @@ public class SlotControllerTest {
 
         /*
          * PATCH (change start slotRequest) (return 400, start cannot be after end)
-         * /
-        slotRequest.start = stringToDate("09/05/2022 11:00");
+         */
+        slotRequest.start = "09/05/2022 11:00";
         var updatedSlotResponse = SlotFixtures.changeSlotStart(id,slotRequest)
                 .then()
                 .statusCode(400)
-                .extract().body().jsonPath().getObject(".", SlotResponse.class);
+                .extract().body().asString();
 
 
-        assertThat(updatedSlotResponse).isEqualTo(null);
-        */
+        assertThat(updatedSlotResponse).isEqualTo("");
+
 
         /*
          * delete
@@ -116,8 +116,63 @@ public class SlotControllerTest {
                 .statusCode(200)
                 .extract().body().asString();
 
-
         assertThat(deleteSlotResponse).isEqualTo("Slot " + id + " deleted");
+
+        /*
+         * delete again
+         */
+        deleteSlotResponse = SlotFixtures.deleteById(id)
+                .then()
+                .statusCode(400)
+                .extract().body().asString();
+
+
+        assertThat(deleteSlotResponse).isEqualTo("Slot " + id + " not exist");
     }
+
+    @Test
+    public void should_return_bad_request() {
+        var slotRequest = new SlotRequest();
+        slotRequest.start = "09/05/2022 11:00";
+        slotRequest.end = "09/05/2022 10:00";
+
+        var slotResponse = SlotFixtures.create(slotRequest)
+                .then()
+                .statusCode(400)
+                .extract().body().asString();
+        assertThat(slotResponse).isEqualTo("");
+
+        /*
+         * get by id
+         */
+        var getSlotResponse = SlotFixtures.getById(0)
+                .then()
+                .statusCode(400)
+                .extract().body().asString();
+
+        assertThat(getSlotResponse).isEqualTo("");
+    }
+
+
+
+    @Test
+    public void should_get_all() {
+        var slotRequest = new SlotRequest();
+        slotRequest.start = "09/05/2022 09:00";
+        slotRequest.end = "09/05/2022 10:00";
+        SlotFixtures.create(slotRequest)
+                .then()
+                .statusCode(201);
+        SlotFixtures.create(slotRequest)
+                .then()
+                .statusCode(201);
+
+        var slotResponse = SlotFixtures.getAll()
+                .then()
+                .statusCode(200)
+                .extract().body().jsonPath().getList(".", SlotResponse.class);
+    }
+
+
 
 }

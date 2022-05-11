@@ -10,6 +10,7 @@ public class SlotValidationService {
     public boolean isValid(Slot slot) throws ParseException {
         if(slot.getEndSlot() == null || slot.getStartSlot() == null)
             return false;
+        //todo try catch a faire peut etre
         var end = DateManipulator.stringToDate(slot.getEndSlot());
         var start = DateManipulator.stringToDate(slot.getStartSlot());
 
