@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
@@ -168,20 +170,36 @@ public class SlotControllerTest {
 
     @Test
     public void should_get_all() {
+
         var slotRequest = new SlotRequest();
         slotRequest.start = "09/05/2022 09:00";
         slotRequest.end = "09/05/2022 10:00";
-        SlotFixtures.create(slotRequest)
+
+        var slot1 = SlotFixtures.create(slotRequest)
                 .then()
-                .statusCode(201);
-        SlotFixtures.create(slotRequest)
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", SlotResponse.class);
+
+        slotRequest.start = "09/05/2022 10:00";
+        slotRequest.end = "09/05/2022 11:00";
+        var slot2 = SlotFixtures.create(slotRequest)
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", SlotResponse.class);
 
         var slotResponse = SlotFixtures.getAll()
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getList(".", SlotResponse.class);
+
+        //assertThat(slotResponse.contains(slot1)).isTrue();
+
+        slotRequest.start = "09/05/2022 09:00";
+        slotResponse = SlotFixtures.getByStart(slotRequest)
+                .then()
+                .statusCode(200)
+                .extract().body().jsonPath().getList(".", SlotResponse.class);
+        assertThat(slotResponse.get(0).getStart()).isEqualTo(slotRequest.start);
     }
 
 

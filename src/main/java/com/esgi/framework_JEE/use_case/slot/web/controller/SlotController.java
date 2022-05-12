@@ -26,7 +26,6 @@ public class SlotController {
 
     /*
     todo
-        get by start slot
         gte by day maybe ? a voir plus tard
      */
 
@@ -60,6 +59,15 @@ public class SlotController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(
                 slotToSlotResponse(slot),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/start")
+    public ResponseEntity<List<SlotResponse>> getByStart(@RequestBody SlotRequest slotRequest){
+        var slot = slotQuery.findByStartSlot(slotRequest.start);
+        return new ResponseEntity<>(
+                listSlotToListSlotResponse(slot),
                 HttpStatus.OK
         );
     }

@@ -16,6 +16,14 @@ public class SlotFixtures {
                 .post("/slot/create");
     }
 
+    public static Response getByStart(SlotRequest slotRequest){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(slotRequest)
+                .get("/slot/start");
+    }
+
     public static Response getById(int slotId){
         return given()
                 .contentType(ContentType.JSON)
