@@ -1,6 +1,7 @@
 package com.esgi.framework_JEE.use_case.slot.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,7 +13,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "slot")
 public class Slot {
+
+
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",

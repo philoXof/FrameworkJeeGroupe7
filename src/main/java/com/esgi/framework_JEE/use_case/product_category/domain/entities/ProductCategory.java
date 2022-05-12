@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.use_case.product_category.domain.entities;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "product_category")
 public class ProductCategory {
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",
