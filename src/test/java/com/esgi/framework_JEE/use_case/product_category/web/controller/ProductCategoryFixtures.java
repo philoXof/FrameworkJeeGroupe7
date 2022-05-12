@@ -38,4 +38,12 @@ public class ProductCategoryFixtures {
                 .when()
                 .delete("/product_category/" + product_categoryId);
     }
+
+    public static Response getAll(){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/product_category/");
+    }
+
 }
