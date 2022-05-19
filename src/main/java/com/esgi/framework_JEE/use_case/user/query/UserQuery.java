@@ -1,6 +1,6 @@
 package com.esgi.framework_JEE.use_case.user.query;
 
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.user.Domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

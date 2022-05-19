@@ -1,4 +1,4 @@
-package com.esgi.framework_JEE.use_case.user.entities;
+package com.esgi.framework_JEE.use_case.user.Domain.entities;
 import javax.persistence.*;
 import lombok.*;
 

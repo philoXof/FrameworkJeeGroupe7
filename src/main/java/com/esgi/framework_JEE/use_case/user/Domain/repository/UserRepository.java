@@ -1,6 +1,6 @@
 package com.esgi.framework_JEE.use_case.user.Domain.repository;
 
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

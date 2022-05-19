@@ -2,7 +2,7 @@ package com.esgi.framework_JEE.use_case.invoice.domain;
 
 
 
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 
 import javax.persistence.*;
 import java.util.Date;

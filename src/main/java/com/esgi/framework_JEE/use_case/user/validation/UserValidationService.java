@@ -1,7 +1,7 @@
 package com.esgi.framework_JEE.use_case.user.validation;
 
 import com.esgi.framework_JEE.application.validation.EmailValidation;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 
 public class UserValidationService {
 

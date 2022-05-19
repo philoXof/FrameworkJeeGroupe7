@@ -3,7 +3,7 @@ package com.esgi.framework_JEE.invoice;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.domain.InvoiceService;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.repository.InvoiceRepository;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

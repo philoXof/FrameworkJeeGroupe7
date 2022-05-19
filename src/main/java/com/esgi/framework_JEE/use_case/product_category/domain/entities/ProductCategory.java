@@ -1,17 +1,18 @@
-package com.esgi.framework_JEE.use_case.slot.entities;
+package com.esgi.framework_JEE.use_case.product_category.domain.entities;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "slot")
-public class Slot {
+@Table(name = "product_category")
+public class ProductCategory {
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",
@@ -19,9 +20,6 @@ public class Slot {
     )
     private int id;
 
-    @Column(name = "start")
-    private Date start;
-
-    @Column(name = "end")
-    private Date end;
+    @Column(name = "name")
+    private String name;
 }
