@@ -1,4 +1,4 @@
-package com.esgi.framework_JEE.use_case.product_category.web.controller;
+/*package com.esgi.framework_JEE.use_case.product_category.web.controller;
 
 import com.esgi.framework_JEE.use_case.product_category.web.request.ProductCategoryRequest;
 import com.esgi.framework_JEE.use_case.product_category.web.response.ProductCategoryResponse;
@@ -39,7 +39,7 @@ public class ProductCategoryControllerTest {
 
         /*
          * create
-         */
+         * /
         var productCategoryResponse = ProductCategoryFixtures.create(productCategoryRequest)
                 .then()
                 .statusCode(201)
@@ -53,7 +53,7 @@ public class ProductCategoryControllerTest {
 
         /*
          * get by id
-         */
+         * /
         var getProductCategoryResponse = ProductCategoryFixtures.getById(id)
                 .then()
                 .statusCode(200)
@@ -66,7 +66,7 @@ public class ProductCategoryControllerTest {
 
         /*
          * update (change name)
-         */
+         * /
         productCategoryRequest.name = "newName";
         var updatedProductCategoryResponse = ProductCategoryFixtures.changeProductCategoryName(id,productCategoryRequest)
                 .then()
@@ -79,7 +79,7 @@ public class ProductCategoryControllerTest {
 
         /*
          * delete
-         */
+         * /
         var deleteProductCategoryResponse = ProductCategoryFixtures.deleteById(id)
                 .then()
                 .statusCode(200)
@@ -110,7 +110,7 @@ public class ProductCategoryControllerTest {
 
         /*
          * get by id
-         */
+         * /
         var response2 = ProductCategoryFixtures.getById(0)
                 .then()
                 .statusCode(400)
@@ -153,3 +153,4 @@ public class ProductCategoryControllerTest {
     }
 
 }
+*/
