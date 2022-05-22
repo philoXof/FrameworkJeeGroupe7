@@ -146,7 +146,7 @@
 				<version>2.2.0</version>
 				<configuration>
 					<version>1</version>
-					<projectId>GCLOUD_CONFIG</projectId>
+					<projectId>framework-jee-4eme-annee</projectId>
 				</configuration>
 			</plugin>
 
