@@ -2,7 +2,7 @@ package com.esgi.framework_JEE.invoice;
 
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.repository.InvoiceRepository;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
 package com.esgi.framework_JEE.use_case.invoice.infrastructure.repository;
 
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
