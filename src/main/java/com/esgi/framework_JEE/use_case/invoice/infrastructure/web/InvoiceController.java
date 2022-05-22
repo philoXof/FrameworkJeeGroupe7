@@ -60,6 +60,10 @@ public class InvoiceController {
     public ResponseEntity<InvoiceResponse> getById(@PathVariable @NotNull int id){
         var invoice = invoiceService.getById(id);
 
+        if(invoice == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(toResponse(invoice), HttpStatus.FOUND);
     }
 
