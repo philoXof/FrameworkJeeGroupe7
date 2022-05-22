@@ -7,8 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -34,7 +36,7 @@ class InvoiceRepositoryTest {
     }
 
 
-    //@Test
+    @Test
     public void shouldFindEmpty(){
         var invoices = invoiceRepository.findAll();
         assertThat(invoices).isEmpty();
@@ -55,15 +57,22 @@ class InvoiceRepositoryTest {
                 .setCreationDate(new Date())
                 .setUser(user);
 
+        invoiceRepository.save(invoice1);
+
         var invoice2 = new Invoice()
                 .setAmount(102.2)
                 .setCreationDate(new Date())
                 .setUser(user);
 
+        invoiceRepository.save(invoice2);
+
         var invoice3 = new Invoice()
                 .setAmount(103.3)
                 .setCreationDate(new Date())
                 .setUser(user);
+
+        invoiceRepository.save(invoice3);
+
 
         var invoices = invoiceRepository.findAll();
 
@@ -73,14 +82,15 @@ class InvoiceRepositoryTest {
 
     @Test
     public void shouldGetInvoiceById(){
-        var invoice1 = new Invoice();
-        entityManager.persist(invoice1);
 
-        var invoice2 = new Invoice();
-        var invoiceCreated = entityManager.persist(invoice2);
+        var invoice = new Invoice()
+                .setAmount(103.3)
+                .setCreationDate(new Date());
+
+        var invoiceCreated = entityManager.persist(invoice);
 
         var invoiceFind = invoiceRepository.findById(invoiceCreated.getId());
-        assertThat(invoiceFind).isEqualTo(invoiceCreated);
+        assertThat(invoiceFind).hasValue(invoiceCreated);
     }
 
 
