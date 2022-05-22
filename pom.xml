@@ -145,7 +145,7 @@
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>2.2.0</version>
 				<configuration>
-					<version>1</version>
+					<version>GCLOUD_CONFIG</version>
 					<projectId>framework-jee-4eme-annee</projectId>
 				</configuration>
 			</plugin>
