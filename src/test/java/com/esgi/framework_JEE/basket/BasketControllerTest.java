@@ -33,7 +33,7 @@ public class BasketControllerTest {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
-
+/*
     @Test
     public void shouldGenerateBasketWithUserId(){
 
@@ -53,6 +53,8 @@ public class BasketControllerTest {
         assertThat(basketResponse.getUserId()).isEqualTo(user_id);
 
     }
+
+ */
 
     @Test
     public void shouldDeleteBasket(){

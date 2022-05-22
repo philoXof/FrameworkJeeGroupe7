@@ -31,7 +31,7 @@ public class InvoiceControllerTest {
 
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
-
+/*
     @Test
     public void shouldGenerateInvoiceWithUserId(){
 
@@ -52,6 +52,8 @@ public class InvoiceControllerTest {
     }
 
 
+
+ */
 
     @Test
     public void shouldGetAllInvoice(){
