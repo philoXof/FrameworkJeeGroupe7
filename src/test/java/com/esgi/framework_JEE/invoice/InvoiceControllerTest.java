@@ -2,18 +2,18 @@ package com.esgi.framework_JEE.invoice;
 
 
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
+import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Value;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 
-import java.util.List;
+import java.util.*;
 
 import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,78 +25,78 @@ public class InvoiceControllerTest {
     @LocalServerPort
     int port;
 
-
     @BeforeEach
     void setup(){
-        RestAssured.port = 8081;
+        RestAssured.port = port;
+
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
     @Test
     public void shouldGenerateInvoiceWithUserId(){
 
-        System.out.println("-----------Je suis le port------- : " + port);
-        System.out.println("-----------Je suis le port------- : " + RestAssured.port);
-        var location = InvoiceFixtures.generateInvoice(1)
+        int user_id = 1;
+
+        var location = InvoiceFixtures.generateInvoice(user_id)
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
 
-
-        var invoice = when()
+        var invoiceResponse = when()
                 .get(location)
                 .then()
-                .statusCode(200)
-                .extract().body().jsonPath().getObject(".", Invoice.class);
+                .statusCode(302)
+                .extract().body().jsonPath().getObject(".", InvoiceResponse.class);
 
-        assertThat(invoice.getUser().getId()).isEqualTo(1);
+        assertThat(invoiceResponse.getUser_id()).isEqualTo(user_id);
     }
 
-    /*
+
 
     @Test
     public void shouldGetAllInvoice(){
-        var location1 = InvoiceFixtures.create()
-                .then()
-                .statusCode(201)
-                .extract().header("Location");
-
-        var location2 = InvoiceFixtures.create()
-                .then()
-                .statusCode(201)
-                .extract().header("Location");
-
-        var invoicesInDB = when()
+        var invoicesInDatabaseBefore = when()
                 .get("/api/v1/invoice")
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".",  new TypeRef<List<Invoice>>() {});
 
-        assertThat(invoicesInDB).hasSize(2);
-    }
 
+        InvoiceFixtures.create()
+                .then()
+                .statusCode(201)
+                .extract().header("Location");
+
+        InvoiceFixtures.create()
+                .then()
+                .statusCode(201)
+                .extract().header("Location");
+
+        var invoicesInDatabaseAfter = when()
+                .get("/api/v1/invoice")
+                .then()
+                .statusCode(200)
+                .extract().body().jsonPath().getObject(".",  new TypeRef<List<Invoice>>() {});
+
+        assertThat(invoicesInDatabaseAfter).hasSize(invoicesInDatabaseBefore.size() + 2);
+    }
 
 
     @Test
     public void shouldDeleteInvoice(){
 
-        var invoiceDelete = when()
-                .delete("/api/v1/invoice/1")
+        var locationInvoiceCreated = InvoiceFixtures.create()
+                .then()
+                .statusCode(201)
+                .extract().header("Location");
+
+        when()
+                .delete(locationInvoiceCreated)
                 .then()
                 .statusCode(200);
-
-
-        var invoices = when()
-                .get("/api/v1/invoice")
-                .then()
-                .statusCode(200)
-                .extract()
-                .body().jsonPath().getObject(".", new TypeRef<List<Invoice>>() {});
-
-        assertThat(invoices).hasSize(0);
     }
 
-     */
+
 
 
 }

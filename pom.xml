@@ -64,9 +64,9 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--
-ajouté pour les tests unitaires
--->
+		<!--
+        ajouté pour les tests unitaires
+        -->
 
 		<dependency>
 			<groupId>com.h2database</groupId>

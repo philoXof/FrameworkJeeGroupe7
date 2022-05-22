@@ -17,7 +17,9 @@ public class InvoiceService {
     }
 
     public Invoice createEmpty(){
-        var invoice = new Invoice().setAmount(0.0).setCreationDate(new Date());
+        var invoice = new Invoice()
+                .setAmount(0.0)
+                .setCreationDate(new Date());
         invoiceRepository.save(invoice);
 
         return invoice;
@@ -35,6 +37,10 @@ public class InvoiceService {
 
     public Invoice getById(int id){
         return invoiceRepository.getInvoiceById(id);
+    }
+
+    public List<Invoice> getByUserId(User user){
+        return invoiceRepository.getInvoicesByUser(user);
     }
 
     public List<Invoice> getAll(){

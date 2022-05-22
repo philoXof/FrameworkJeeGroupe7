@@ -19,23 +19,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
-@DataJpaTest
-@SpringBootTest
+//@DataJpaTest
+//@SpringBootTest
 public class InvoiceServiceTest {
 
-    @MockBean
-    @Autowired
+    //TODO : InMemoryInvoiceRepository
+
     InvoiceRepository invoiceRepository;
 
-    @Autowired
-    InvoiceService invoiceService;// = new InvoiceService(invoiceRepository);
+    InvoiceService invoiceService;
     User user;
-
 
 
     @Before
     public void init(){
-        //invoiceRepository = new InvoiceRepository();
+        //invoiceRepository = new InMemoryInvoiceRepository();
         invoiceService = new InvoiceService(invoiceRepository);
 
         user = new User();
