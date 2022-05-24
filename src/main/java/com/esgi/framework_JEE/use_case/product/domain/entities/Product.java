@@ -1,7 +1,8 @@
-package com.esgi.framework_JEE.use_case.product.entities;
+package com.esgi.framework_JEE.use_case.product.domain.entities;
 
 import com.esgi.framework_JEE.use_case.basket.domain.Basket;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
+import com.esgi.framework_JEE.use_case.product_category.domain.entities.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,12 +26,16 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "nutriscore")
-    private String nutriscore;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private ProductCategory productCategory;
 
+    @Column(name = "nutriscore", nullable = true)
+    private String nutriscore;
+/*
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    private Product product;*/
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "basket_id")
