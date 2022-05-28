@@ -3,7 +3,7 @@ package com.esgi.framework_JEE.basket;
 
 import com.esgi.framework_JEE.invoice.InvoiceFixtures;
 import com.esgi.framework_JEE.use_case.basket.infrastructure.web.response.BasketResponse;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
 import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import io.restassured.RestAssured;

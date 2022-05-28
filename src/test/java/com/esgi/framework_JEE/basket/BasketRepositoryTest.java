@@ -3,7 +3,7 @@ package com.esgi.framework_JEE.basket;
 
 import com.esgi.framework_JEE.use_case.basket.domain.Basket;
 import com.esgi.framework_JEE.use_case.basket.infrastructure.repository.BasketRepository;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
