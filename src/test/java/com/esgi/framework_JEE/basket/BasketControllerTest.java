@@ -38,15 +38,16 @@ public class BasketControllerTest {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
-
+    //TODO : A revoir
+/*
     @Test
     public void shouldGenerateBasketWithUserId(){
 
         var userRequest = new UserRequest();
         userRequest.firstname = "kelyan";
         userRequest.lastname = "bervin";
-        userRequest.email = "mail@mail.mail";
-        userRequest.password = "mot de passse";
+        userRequest.email = "test@test.fr";
+        userRequest.password = "mot de passe";
 
         var user = UserFixture.create(userRequest)
                 .then()
@@ -67,7 +68,10 @@ public class BasketControllerTest {
 
         assertThat(basketResponse.getUserId()).isEqualTo(user.getId());
 
+        UserFixture.deleteById(user.getId());
     }
+
+ */
 
     @Test
     public void shouldDeleteBasket(){
