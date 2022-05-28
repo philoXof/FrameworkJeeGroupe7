@@ -7,6 +7,7 @@ import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import java.util.*;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -67,6 +69,18 @@ public class BasketControllerTest {
                 .then()
                 .statusCode(200);
 
+    }
+
+    @Test
+    public void userCannotHaveManyBasket(){
+        int user_id = 1;
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/basket/generate/" + user_id)
+                .then()
+                .statusCode(403);
     }
 
 }
