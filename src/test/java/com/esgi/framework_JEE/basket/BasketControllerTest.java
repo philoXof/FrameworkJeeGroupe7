@@ -39,14 +39,14 @@ public class BasketControllerTest {
     }
 
     //TODO : A revoir
-/*
+
     @Test
     public void shouldGenerateBasketWithUserId(){
 
         var userRequest = new UserRequest();
         userRequest.firstname = "kelyan";
         userRequest.lastname = "bervin";
-        userRequest.email = "test@test.fr";
+        userRequest.email = "test@test.test";
         userRequest.password = "mot de passe";
 
         var user = UserFixture.create(userRequest)
@@ -71,7 +71,6 @@ public class BasketControllerTest {
         UserFixture.deleteById(user.getId());
     }
 
- */
 
     @Test
     public void shouldDeleteBasket(){
@@ -88,6 +87,9 @@ public class BasketControllerTest {
 
     }
 
+
+    //TODO : Créer le user puis créer deux Basket,
+    // le premier aura un 200 et le deuxième une 403
     @Test
     public void userCannotHaveManyBasket(){
         int user_id = 1;
