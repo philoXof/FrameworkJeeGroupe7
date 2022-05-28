@@ -1,4 +1,4 @@
-/*package com.esgi.framework_JEE.use_case.slot.web.controller;
+package com.esgi.framework_JEE.use_case.slot.web.controller;
 
 import com.esgi.framework_JEE.kernel.date.DateManipulator;
 import com.esgi.framework_JEE.use_case.slot.web.request.SlotRequest;
@@ -41,7 +41,7 @@ public class SlotControllerTest {
 
         /*
          * create
-         * /
+         */
         var slotResponse = SlotFixtures.create(slotRequest)
                 .then()
                 .statusCode(201)
@@ -56,7 +56,7 @@ public class SlotControllerTest {
 
         /*
          * get by id
-         * /
+         */
         var getSlotResponse = SlotFixtures.getById(id)
                 .then()
                 .statusCode(200)
@@ -70,7 +70,7 @@ public class SlotControllerTest {
 
         /*
          * PATCH (change start slotRequest)
-         * /
+         */
         slotRequest.start = "08/05/2022 11:00";
         var updatedStartSlotResponse = SlotFixtures.changeSlotStart(id,slotRequest)
                 .then()
@@ -84,7 +84,7 @@ public class SlotControllerTest {
 
         /*
          * PATCH (change end slotRequest)
-         * /
+         */
         slotRequest.end = "08/05/2022 12:00";
         var updatedEndSlotResponse = SlotFixtures.changeSlotEnd(id,slotRequest)
                 .then()
@@ -98,7 +98,7 @@ public class SlotControllerTest {
 
         /*
          * PATCH (change start slotRequest) (return 400, start cannot be after end)
-         * /
+         */
         slotRequest.start = "09/05/2022 11:00";
         var updatedSlotResponse = SlotFixtures.changeSlotStart(id,slotRequest)
                 .then()
@@ -110,7 +110,7 @@ public class SlotControllerTest {
 
         /*
          * PATCH (change start slotRequest) (return 400, start cannot be after end)
-         * /
+         */
         slotRequest.end = "09/05/2012 11:00";
         var updatedSlotResponse2 = SlotFixtures.changeSlotEnd(id,slotRequest)
                 .then()
@@ -122,7 +122,7 @@ public class SlotControllerTest {
 
         /*
          * delete
-         * /
+         */
 
         var deleteSlotResponse = SlotFixtures.deleteById(id)
                 .then()
@@ -133,7 +133,7 @@ public class SlotControllerTest {
 
         /*
          * delete again
-         * /
+         */
         deleteSlotResponse = SlotFixtures.deleteById(id)
                 .then()
                 .statusCode(400)
@@ -157,7 +157,7 @@ public class SlotControllerTest {
 
         /*
          * get by id
-         * /
+         */
         var getSlotResponse = SlotFixtures.getById(0)
                 .then()
                 .statusCode(400)
@@ -204,4 +204,4 @@ public class SlotControllerTest {
 
 
 
-}*/
+}

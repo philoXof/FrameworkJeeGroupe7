@@ -23,12 +23,35 @@ public class UserFixture {
     }
 
 
-    public static Response changeUserName(int userId, UserRequest userRequest){
+    public static Response changeLastname(int userId, UserRequest userRequest){
         return given()
                 .contentType(ContentType.JSON)
                 .when()
                 .body(userRequest)
-                .patch("/user/" + userId);
+                .patch("/user/lastname" + userId);
+    }
+
+    public static Response changeFirstname(int userId, UserRequest userRequest){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(userRequest)
+                .patch("/user/firstname" + userId);
+    }
+    public static Response changePassword(int userId, UserRequest userRequest){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(userRequest)
+                .patch("/user/password/" + userId);
+    }
+
+    public static Response changeEmail(int userId, UserRequest userRequest){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(userRequest)
+                .patch("/user/email/" + userId);
     }
 
 
@@ -45,5 +68,13 @@ public class UserFixture {
                 .when()
                 .get("/user/");
     }
-    
+
+    public static Response login(UserRequest userRequest){
+        return given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(userRequest)
+                .delete("/user/");
+    }
+
 }
