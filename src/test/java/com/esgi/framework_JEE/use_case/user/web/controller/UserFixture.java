@@ -23,7 +23,9 @@ public class UserFixture {
     }
 
 
+
     public static Response changeLastname(int userId, UserRequest userRequest){
+
         return given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -52,6 +54,7 @@ public class UserFixture {
                 .when()
                 .body(userRequest)
                 .patch("/user/email/" + userId);
+
     }
 
 
@@ -69,6 +72,7 @@ public class UserFixture {
                 .get("/user/");
     }
 
+
     public static Response login(UserRequest userRequest){
         return given()
                 .contentType(ContentType.JSON)
@@ -78,3 +82,5 @@ public class UserFixture {
     }
 
 }
+
+

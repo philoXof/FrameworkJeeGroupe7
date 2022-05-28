@@ -49,7 +49,13 @@ public class BasketController {
             return new ResponseEntity<>(" User not found", HttpStatus.NOT_FOUND);
         }
 
+        var basket = basketService.getByUserId(user_id);
+        if(basket != null){
+            return new ResponseEntity<>(user.getFirstname() + " have already a basket", HttpStatus.FORBIDDEN);
+        }
+
         var basketCreated = basketService.generateWithUser(user);
+
 
         return ResponseEntity.created(
                 linkTo(
@@ -61,6 +67,21 @@ public class BasketController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable int id){
         var basket = basketService.getById(id);
+        if(basket == null){
+            return new ResponseEntity<>(" Basket not found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(toResponse(basket), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getByUserId(@PathVariable int id){
+        var user = userQuery.getById(id);
+        if(user == null){
+            return new ResponseEntity<>(" User not found", HttpStatus.NOT_FOUND);
+        }
+
+        var basket = basketService.getByUserId(user.getId());
         if(basket == null){
             return new ResponseEntity<>(" Basket not found", HttpStatus.NOT_FOUND);
         }

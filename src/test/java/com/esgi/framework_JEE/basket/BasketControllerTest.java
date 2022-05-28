@@ -3,10 +3,14 @@ package com.esgi.framework_JEE.basket;
 
 import com.esgi.framework_JEE.invoice.InvoiceFixtures;
 import com.esgi.framework_JEE.use_case.basket.infrastructure.web.response.BasketResponse;
+import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
+import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +19,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import java.util.*;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -33,13 +38,24 @@ public class BasketControllerTest {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
-
+    //TODO : A revoir
+/*
     @Test
     public void shouldGenerateBasketWithUserId(){
 
-        int user_id = 1;
+        var userRequest = new UserRequest();
+        userRequest.firstname = "kelyan";
+        userRequest.lastname = "bervin";
+        userRequest.email = "test@test.fr";
+        userRequest.password = "mot de passe";
 
-        var location = BasketFixtures.generateInvoice(user_id)
+        var user = UserFixture.create(userRequest)
+                .then()
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", User.class);
+
+
+        var location = BasketFixtures.generateInvoice(user.getId())
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
@@ -50,9 +66,12 @@ public class BasketControllerTest {
                 .statusCode(302)
                 .extract().body().jsonPath().getObject(".", BasketResponse.class);
 
-        assertThat(basketResponse.getUserId()).isEqualTo(user_id);
+        assertThat(basketResponse.getUserId()).isEqualTo(user.getId());
 
+        UserFixture.deleteById(user.getId());
     }
+
+ */
 
     @Test
     public void shouldDeleteBasket(){
@@ -67,6 +86,18 @@ public class BasketControllerTest {
                 .then()
                 .statusCode(200);
 
+    }
+
+    @Test
+    public void userCannotHaveManyBasket(){
+        int user_id = 1;
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/basket/generate/" + user_id)
+                .then()
+                .statusCode(403);
     }
 
 }

@@ -7,4 +7,6 @@ public interface BasketRepository extends JpaRepository<Basket, Integer> {
 
     Basket getBasketById(int basketId);
 
+    Basket findBasketByUser_Id(int user_id);
+
 }
