@@ -68,6 +68,21 @@ public class BasketController {
         return new ResponseEntity<>(toResponse(basket), HttpStatus.FOUND);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getByUserId(@PathVariable int id){
+        var user = userQuery.getById(id);
+        if(user == null){
+            return new ResponseEntity<>(" User not found", HttpStatus.NOT_FOUND);
+        }
+
+        var basket = basketService.getByUserId(user.getId());
+        if(basket == null){
+            return new ResponseEntity<>(" Basket not found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(toResponse(basket), HttpStatus.FOUND);
+    }
+
     @GetMapping
     public ResponseEntity<List<BasketResponse>> getAll(){
         var basketResponses = basketService.getAll()

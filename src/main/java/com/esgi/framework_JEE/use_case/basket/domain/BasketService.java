@@ -34,6 +34,10 @@ public class BasketService {
         return basketRepository.getBasketById(id);
     }
 
+    public Basket getByUserId(int id){
+        return basketRepository.findBasketByUser_Id(id);
+    }
+
     public List<Basket> getAll(){
         return basketRepository.findAll();
     }
