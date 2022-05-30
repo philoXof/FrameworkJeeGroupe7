@@ -84,11 +84,6 @@ public class ProductCategoryController {
     }
 
 
-
-
-
-
-
     private ProductCategoryResponse productCategoryToProductCategoryResponse(ProductCategory productCategory){
         return new ProductCategoryResponse()
                 .setId(productCategory.getId())

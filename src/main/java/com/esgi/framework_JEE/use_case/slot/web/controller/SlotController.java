@@ -26,7 +26,7 @@ public class SlotController {
 
     /*
     todo
-        gte by day maybe ? a voir plus tard
+        get by day maybe ? a voir plus tard
      */
 
     public SlotController(SlotCommand slotCommand, SlotQuery slotQuery) {
