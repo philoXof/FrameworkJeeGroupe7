@@ -1,8 +1,12 @@
 package com.esgi.framework_JEE.invoice;
 
 
+import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
+import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
+import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -35,9 +39,19 @@ public class InvoiceControllerTest {
     @Test
     public void shouldGenerateInvoiceWithUserId(){
 
-        int user_id = 1;
+        var userRequest = new UserRequest();
+        userRequest.firstname = "kelyan";
+        userRequest.lastname = "bervin";
+        userRequest.email = TestFixtures.randomEmail();
+        userRequest.password = "mot de passe";
 
-        var location = InvoiceFixtures.generateInvoice(user_id)
+        var user = UserFixture.create(userRequest)
+                .then()
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", User.class);
+
+
+        var location = InvoiceFixtures.generateInvoice(user.getId())
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
@@ -48,7 +62,9 @@ public class InvoiceControllerTest {
                 .statusCode(302)
                 .extract().body().jsonPath().getObject(".", InvoiceResponse.class);
 
-        assertThat(invoiceResponse.getUser_id()).isEqualTo(user_id);
+        assertThat(invoiceResponse.getUser_id()).isEqualTo(user.getId());
+
+        UserFixture.deleteById(user.getId());
     }
 
 
@@ -95,8 +111,5 @@ public class InvoiceControllerTest {
                 .then()
                 .statusCode(200);
     }
-
-
-
 
 }

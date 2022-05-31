@@ -1,13 +1,12 @@
 package com.esgi.framework_JEE.basket;
 
 
-import com.esgi.framework_JEE.invoice.InvoiceFixtures;
+import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.use_case.basket.infrastructure.web.response.BasketResponse;
 import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
 import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import io.restassured.RestAssured;
-import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 
-import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -31,23 +29,22 @@ public class BasketControllerTest {
     @LocalServerPort
     int port;
 
+    UserRequest userRequest = new UserRequest();
+
     @BeforeEach
     void setup(){
         RestAssured.port = port;
 
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
-    }
 
-    //TODO : A revoir
-/*
-    @Test
-    public void shouldGenerateBasketWithUserId(){
-
-        var userRequest = new UserRequest();
         userRequest.firstname = "kelyan";
         userRequest.lastname = "bervin";
-        userRequest.email = "test@test.fr";
+        userRequest.email = TestFixtures.randomEmail();
         userRequest.password = "mot de passe";
+    }
+
+    @Test
+    public void shouldGenerateBasketWithUserId(){
 
         var user = UserFixture.create(userRequest)
                 .then()
@@ -71,10 +68,13 @@ public class BasketControllerTest {
         UserFixture.deleteById(user.getId());
     }
 
- */
 
     @Test
     public void shouldDeleteBasket(){
+
+
+        userRequest.email = TestFixtures.randomEmail();
+        userRequest.password = "mot de passe";
 
         var locationBasketCreated = BasketFixtures.create()
                 .then()
@@ -90,14 +90,32 @@ public class BasketControllerTest {
 
     @Test
     public void userCannotHaveManyBasket(){
-        int user_id = 1;
+
+        userRequest.email = TestFixtures.randomEmail();
+
+        var user = UserFixture.create(userRequest)
+                .then()
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", User.class);
+
 
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/basket/generate/" + user_id)
+                .post("/api/v1/basket/generate/" + user.getId())
+                .then()
+                .statusCode(201);
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/basket/generate/" + user.getId())
                 .then()
                 .statusCode(403);
     }
+
+
+
+
 
 }
