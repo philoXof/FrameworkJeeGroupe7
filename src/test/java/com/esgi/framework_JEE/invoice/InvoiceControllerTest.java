@@ -4,7 +4,7 @@ package com.esgi.framework_JEE.invoice;
 import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
-import com.esgi.framework_JEE.use_case.user.entities.User;
+import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
 import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
 import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import io.restassured.RestAssured;
