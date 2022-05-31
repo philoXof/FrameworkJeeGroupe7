@@ -1,13 +1,12 @@
 package com.esgi.framework_JEE.basket;
 
 
-import com.esgi.framework_JEE.invoice.InvoiceFixtures;
+import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.use_case.basket.infrastructure.web.response.BasketResponse;
 import com.esgi.framework_JEE.use_case.user.entities.User;
 import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
 import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import io.restassured.RestAssured;
-import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 
-import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -41,10 +39,10 @@ public class BasketControllerTest {
 
         userRequest.firstname = "kelyan";
         userRequest.lastname = "bervin";
-        userRequest.email = randomEmail();
+        userRequest.email = TestFixtures.randomEmail();
         userRequest.password = "mot de passe";
     }
-    
+
     @Test
     public void shouldGenerateBasketWithUserId(){
 
@@ -75,7 +73,7 @@ public class BasketControllerTest {
     public void shouldDeleteBasket(){
 
 
-        userRequest.email = randomEmail();
+        userRequest.email = TestFixtures.randomEmail();
         userRequest.password = "mot de passe";
 
         var locationBasketCreated = BasketFixtures.create()
@@ -93,7 +91,7 @@ public class BasketControllerTest {
     @Test
     public void userCannotHaveManyBasket(){
 
-        userRequest.email = randomEmail();
+        userRequest.email = TestFixtures.randomEmail();
 
         var user = UserFixture.create(userRequest)
                 .then()
@@ -118,8 +116,6 @@ public class BasketControllerTest {
 
 
 
-    private static String randomEmail() {
-        return "random-" + UUID.randomUUID().toString() + "@example.com";
-    }
+
 
 }

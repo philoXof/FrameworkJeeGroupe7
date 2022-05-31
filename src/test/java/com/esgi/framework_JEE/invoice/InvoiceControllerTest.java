@@ -1,6 +1,7 @@
 package com.esgi.framework_JEE.invoice;
 
 
+import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
 import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
 import com.esgi.framework_JEE.use_case.user.entities.User;
@@ -41,7 +42,7 @@ public class InvoiceControllerTest {
         var userRequest = new UserRequest();
         userRequest.firstname = "kelyan";
         userRequest.lastname = "bervin";
-        userRequest.email = "test@test.test";
+        userRequest.email = TestFixtures.randomEmail();
         userRequest.password = "mot de passe";
 
         var user = UserFixture.create(userRequest)
@@ -110,8 +111,5 @@ public class InvoiceControllerTest {
                 .then()
                 .statusCode(200);
     }
-
-
-
 
 }
