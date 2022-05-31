@@ -9,6 +9,7 @@ import lombok.*;
 public class User {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",

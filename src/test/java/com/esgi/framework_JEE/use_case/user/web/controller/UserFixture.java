@@ -30,7 +30,7 @@ public class UserFixture {
                 .contentType(ContentType.JSON)
                 .when()
                 .body(userRequest)
-                .patch("/user/lastname" + userId);
+                .patch("/user/lastname/" + userId);
     }
 
     public static Response changeFirstname(int userId, UserRequest userRequest){
@@ -38,7 +38,7 @@ public class UserFixture {
                 .contentType(ContentType.JSON)
                 .when()
                 .body(userRequest)
-                .patch("/user/firstname" + userId);
+                .patch("/user/firstname/" + userId);
     }
     public static Response changePassword(int userId, UserRequest userRequest){
         return given()
@@ -78,7 +78,7 @@ public class UserFixture {
                 .contentType(ContentType.JSON)
                 .when()
                 .body(userRequest)
-                .delete("/user/");
+                .get("/user/login");
     }
 
 }
