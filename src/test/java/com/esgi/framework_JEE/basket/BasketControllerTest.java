@@ -31,23 +31,22 @@ public class BasketControllerTest {
     @LocalServerPort
     int port;
 
+    UserRequest userRequest = new UserRequest();
+
     @BeforeEach
     void setup(){
         RestAssured.port = port;
 
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
-    }
 
-    //TODO : A revoir
-
-    @Test
-    public void shouldGenerateBasketWithUserId(){
-
-        var userRequest = new UserRequest();
         userRequest.firstname = "kelyan";
         userRequest.lastname = "bervin";
-        userRequest.email = "test@test.test";
+        userRequest.email = randomEmail();
         userRequest.password = "mot de passe";
+    }
+    
+    @Test
+    public void shouldGenerateBasketWithUserId(){
 
         var user = UserFixture.create(userRequest)
                 .then()
@@ -75,6 +74,10 @@ public class BasketControllerTest {
     @Test
     public void shouldDeleteBasket(){
 
+
+        userRequest.email = randomEmail();
+        userRequest.password = "mot de passe";
+
         var locationBasketCreated = BasketFixtures.create()
                 .then()
                 .statusCode(201)
@@ -87,19 +90,36 @@ public class BasketControllerTest {
 
     }
 
-
-    //TODO : Créer le user puis créer deux Basket,
-    // le premier aura un 200 et le deuxième une 403
     @Test
     public void userCannotHaveManyBasket(){
-        int user_id = 1;
+
+        userRequest.email = randomEmail();
+
+        var user = UserFixture.create(userRequest)
+                .then()
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", User.class);
+
 
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/basket/generate/" + user_id)
+                .post("/api/v1/basket/generate/" + user.getId())
+                .then()
+                .statusCode(201);
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/basket/generate/" + user.getId())
                 .then()
                 .statusCode(403);
+    }
+
+
+
+    private static String randomEmail() {
+        return "random-" + UUID.randomUUID().toString() + "@example.com";
     }
 
 }
