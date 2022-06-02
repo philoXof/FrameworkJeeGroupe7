@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="app-engine-flexible" name="Google App Engine Flexible">
+      <configuration>
+        <option name="appYamlPath" value="C:\Users\kekeb\Documents\ESGI\4eme_annee\jee\FrameworkJeeGroupe7\src\main\appengine\app.yaml" />
+        <option name="dockerDirectory" value="C:\Users\kekeb\Documents\ESGI\4eme_annee\jee\FrameworkJeeGroupe7\src\main\docker" />
+      </configuration>
+    </facet>
+  </component>
+</module>
