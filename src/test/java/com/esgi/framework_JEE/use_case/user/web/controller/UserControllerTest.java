@@ -49,10 +49,17 @@ class UserControllerTest {
         /*
          * create
          */
+
+
+
         var userResponse = UserFixture.create(user1)
                 .then()
                 .statusCode(201)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
+
+        UserFixture.create(user1)
+                .then()
+                .statusCode(400);
 
         var id = userResponse.getId();
 
