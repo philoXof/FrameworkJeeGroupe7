@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+target
 # Log file
 *.log
 
@@ -28,4 +28,5 @@ src/main/resources/application.properties
 hs_err_pid*
 
 # Properties #
+
 *.properties
