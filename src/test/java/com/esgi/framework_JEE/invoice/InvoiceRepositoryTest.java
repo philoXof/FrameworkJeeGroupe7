@@ -1,16 +1,14 @@
 package com.esgi.framework_JEE.invoice;
 
-import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
-import com.esgi.framework_JEE.use_case.invoice.infrastructure.repository.InvoiceRepository;
-import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
+import com.esgi.framework_JEE.invoice.domain.Invoice;
+import com.esgi.framework_JEE.invoice.infrastructure.repository.InvoiceRepository;
+import com.esgi.framework_JEE.user.Domain.entities.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
