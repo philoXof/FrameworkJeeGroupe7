@@ -7,6 +7,10 @@ target
 # BlueJ files
 *.ctxt
 
+# Visual Studio code files
+.vscode
+/code
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -24,5 +28,5 @@ src/main/resources/application.properties
 hs_err_pid*
 
 # Properties #
-.properties
+
 *.properties
