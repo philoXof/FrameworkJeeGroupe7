@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.use_case.user.web.controller;
 
+import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
 import com.esgi.framework_JEE.use_case.user.web.response.UserResponse;
 import io.restassured.RestAssured;
@@ -27,17 +28,17 @@ class UserControllerTest {
         RestAssured.port = port;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
 
-        user1.email= "ljehanno@myges.fr";
+        user1.email= TestFixtures.randomEmail();
         user1.firstname = "lucas";
         user1.lastname = "jehanno";
         user1.password = "securite !";
 
-        user2.email = "kbervin@myges.fr";
+        user2.email = TestFixtures.randomEmail();
         user2.firstname = "kelyan";
         user2.lastname = "bervin";
         user2.password = "j aime les pates";
 
-        user3.email = "hbah@myges.fr";
+        user3.email = TestFixtures.randomEmail();
         user3.firstname = "halimatou";
         user3.lastname = "bah";
         user3.password = "bahbibel";
@@ -140,7 +141,7 @@ class UserControllerTest {
         /*
          * CHANGE EMAIL
          */
-        user1.email = "jehanno.lucas@gmail.com";
+        user1.email = TestFixtures.randomEmail();
         var updatedEmailUserResponse = UserFixture.changeEmail(id,user1)
                 .then()
                 .statusCode(200)
@@ -212,7 +213,7 @@ class UserControllerTest {
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
-        user3.email = "email@non-in.bdd";
+        user3.email = TestFixtures.randomEmail();
         UserFixture.login(user3)
                 .then()
                 .statusCode(400)
@@ -221,7 +222,7 @@ class UserControllerTest {
 
     @Test
     public void should_get_all() {
-        user1.email= "ah@myges.fr";
+        user1.email= TestFixtures.randomEmail();
         user1.firstname = "fsdsd";
         user1.lastname = "sdf";
         user1.password = "sdqfdqsf !";
