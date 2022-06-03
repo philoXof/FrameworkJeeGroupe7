@@ -1,4 +1,0 @@
-runtime: java11
-
-env_variables:
-  GOOGLE_CLOUD_PROJECT: "framework-jee-4eme-annee"

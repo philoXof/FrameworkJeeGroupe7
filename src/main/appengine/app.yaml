@@ -1,0 +1,4 @@
+runtime: java11
+instance_class: F1
+#env_variables:
+#  GOOGLE_CLOUD_PROJECT: "framework-jee-4eme-annee"
