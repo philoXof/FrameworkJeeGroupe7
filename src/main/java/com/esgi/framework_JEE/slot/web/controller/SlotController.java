@@ -19,10 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/slot")
 public class SlotController {
-    @Autowired
+    final
     SlotCommand slotCommand;
 
-    @Autowired
+    final
     SlotQuery slotQuery;
 
     /*
@@ -74,7 +74,7 @@ public class SlotController {
     }
 
     @PatchMapping("/start/{slotId}")
-    public ResponseEntity<SlotResponse> changeStart(@PathVariable int slotId,@RequestBody SlotRequest slotRequest) throws ParseException {
+    public ResponseEntity<SlotResponse> changeStart(@PathVariable int slotId,@RequestBody SlotRequest slotRequest) {
         var slot = slotCommand.changeStart(slotId,slotRequest);
         if(slot == null)
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -82,7 +82,7 @@ public class SlotController {
     }
 
     @PatchMapping("/end/{slotId}")
-    public ResponseEntity<SlotResponse> changeEnd(@PathVariable int slotId,@RequestBody SlotRequest slotRequest) throws ParseException {
+    public ResponseEntity<SlotResponse> changeEnd(@PathVariable int slotId,@RequestBody SlotRequest slotRequest) {
         var slot = slotCommand.changeEnd(slotId,slotRequest);
         if(slot == null)
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

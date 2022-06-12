@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 @Service
 public final class UserCommand {
-    @Autowired
+    final
     UserRepository userRepository;
-    @Autowired
+    final
     UserQuery userQuery;
 
     UserValidationService userValidationService = new UserValidationService();
+
+    public UserCommand(UserRepository userRepository, UserQuery userQuery) {
+        this.userRepository = userRepository;
+        this.userQuery = userQuery;
+    }
 
     public User create(UserRequest userRequest){
         var user = new User();
@@ -80,8 +85,6 @@ public final class UserCommand {
 
     public void delete(int userId) {
         Optional<User> userFromDb = Optional.ofNullable(userRepository.findById(userId));
-        userFromDb.ifPresent(user ->
-                userRepository.delete(user)
-        );
+        userFromDb.ifPresent(userRepository::delete);
     }
 }

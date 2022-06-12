@@ -18,10 +18,10 @@ import java.util.List;
 @RequestMapping("/product_category")
 public class ProductCategoryController {
 
-    @Autowired
+    final
     ProductCategoryCommand productCategoryCommand;
 
-    @Autowired
+    final
     ProductCategoryQuery productCategoryQuery;
 
 

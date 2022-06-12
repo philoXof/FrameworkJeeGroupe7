@@ -19,10 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private final UserCommand userCommand;
-    @Autowired
-    private final UserQuery userQuery;
+    final UserCommand userCommand;
+    final UserQuery userQuery;
 
     public UserController(UserCommand userCommand, UserQuery userQuery){
         this.userCommand = userCommand;

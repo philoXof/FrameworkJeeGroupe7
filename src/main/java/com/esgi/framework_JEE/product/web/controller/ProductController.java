@@ -18,14 +18,20 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequestMapping("/products")
 
 public class ProductController {
-    @Autowired
+    final
     ProductCommand productCommand;
 
-    @Autowired
+    final
     ProductQuery productQuery;
 
-    @Autowired
+    final
     ProductCategoryQuery productCategoryQuery;
+
+    public ProductController(ProductCommand productCommand, ProductQuery productQuery, ProductCategoryQuery productCategoryQuery) {
+        this.productCommand = productCommand;
+        this.productQuery = productQuery;
+        this.productCategoryQuery = productCategoryQuery;
+    }
 
     /**
      * Create - Add a new product

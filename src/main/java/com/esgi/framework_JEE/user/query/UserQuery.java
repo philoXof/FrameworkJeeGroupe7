@@ -10,10 +10,12 @@ import java.util.List;
 @Service
 public class UserQuery {
 
-    @Autowired
+    final
     UserRepository userRepository;
 
-    public UserQuery(){}
+    public UserQuery(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     public List<User> getAll() {
         return userRepository.findAll();

@@ -16,17 +16,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 
 public class VisitedProductController {
-    @Autowired
+    final
     VisitedProductQuery visitedProductQuery;
 
-    @Autowired
+    final
     VisitedProductCommand visitedProductCommand;
 
-    @Autowired
+    final
     ProductQuery productQuery;
 
-    @Autowired
+    final
     UserQuery userQuery;
+
+    public VisitedProductController(VisitedProductQuery visitedProductQuery, VisitedProductCommand visitedProductCommand, ProductQuery productQuery, UserQuery userQuery) {
+        this.visitedProductQuery = visitedProductQuery;
+        this.visitedProductCommand = visitedProductCommand;
+        this.productQuery = productQuery;
+        this.userQuery = userQuery;
+    }
 
     /**
      * Create - Add a new visitedProduct

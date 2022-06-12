@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class VisitedProductCommand {
 
-    @Autowired
+    final
     VisitedProductRepository visitedProductRepository;
+
+    public VisitedProductCommand(VisitedProductRepository visitedProductRepository) {
+        this.visitedProductRepository = visitedProductRepository;
+    }
 
     public VisitedProduct saveVisitedProduct(Product product, User user) {
 

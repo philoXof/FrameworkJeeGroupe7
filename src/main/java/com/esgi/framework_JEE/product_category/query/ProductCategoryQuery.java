@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ProductCategoryQuery {
 
-    @Autowired
+    final
     ProductCategoryRepository productCategoryRepository;
 
     public ProductCategoryQuery(ProductCategoryRepository productCategoryRepository) {

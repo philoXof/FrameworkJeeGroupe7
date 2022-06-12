@@ -12,17 +12,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductCommand {
 
-    @Autowired
-    ProductRepository productRepository;
+    final ProductRepository productRepository;
 
-    @Autowired
-    ProductQuery productQuery;
+    final ProductQuery productQuery;
 
-    @Autowired
-    ProductCategoryQuery productCategoryQuery;
+    final ProductCategoryQuery productCategoryQuery;
 
-    @Autowired
-    NutriscoreApiService nutriscoreApiService;
+    final NutriscoreApiService nutriscoreApiService;
+
+    public ProductCommand(ProductRepository productRepository, ProductQuery productQuery, ProductCategoryQuery productCategoryQuery, NutriscoreApiService nutriscoreApiService) {
+        this.productRepository = productRepository;
+        this.productQuery = productQuery;
+        this.productCategoryQuery = productCategoryQuery;
+        this.nutriscoreApiService = nutriscoreApiService;
+    }
 
     public Product saveProduct(Product product) {
         Product savedProduct = productRepository.save(product);

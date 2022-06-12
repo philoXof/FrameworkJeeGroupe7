@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class VisitedProductQuery {
 
-    @Autowired
-    private VisitedProductRepository visitedProductRepository;
+    private final VisitedProductRepository visitedProductRepository;
+
+    public VisitedProductQuery(VisitedProductRepository visitedProductRepository) {
+        this.visitedProductRepository = visitedProductRepository;
+    }
 
     public Iterable<VisitedProduct> getVisitedProducts() {
         return visitedProductRepository.findAll();

@@ -12,10 +12,14 @@ import java.util.Optional;
 
 @Service
 public class ProductCategoryCommand {
-    @Autowired
+    final
     ProductCategoryRepository productCategoryRepository;
 
     ProductCategoryValidation productCategoryValidation = new ProductCategoryValidation();
+
+    public ProductCategoryCommand(ProductCategoryRepository productCategoryRepository) {
+        this.productCategoryRepository = productCategoryRepository;
+    }
 
     public ProductCategory create(ProductCategoryRequest productCategoryRequest){
         var productCategory = new ProductCategory();

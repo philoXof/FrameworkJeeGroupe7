@@ -14,10 +14,14 @@ import java.util.Optional;
 @Service
 public class SlotCommand {
 
-    @Autowired
+    final
     SlotRepository slotRepository;
 
     SlotValidationService slotValidationService = new SlotValidationService();
+
+    public SlotCommand(SlotRepository slotRepository) {
+        this.slotRepository = slotRepository;
+    }
     //DateManipulator dateManipulator;
 
     public Slot create(SlotRequest slotRequest) throws ParseException {
@@ -53,6 +57,6 @@ public class SlotCommand {
 
     public void delete(int id){
         Optional<Slot> dbSlot = Optional.ofNullable(slotRepository.findById(id));
-        dbSlot.ifPresent(slot -> slotRepository.delete(slot));
+        dbSlot.ifPresent(slotRepository::delete);
     }
 }

@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductQuery {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductQuery(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public Product getProduct(int id) {
         return productRepository.getById(id);
