@@ -5,6 +5,7 @@ import com.esgi.framework_JEE.product.web.request.ProductRequest;
 import com.esgi.framework_JEE.product.web.command.ProductCommand;
 import com.esgi.framework_JEE.product.domain.entities.Product;
 import com.esgi.framework_JEE.product.web.query.ProductQuery;
+import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;
 import com.esgi.framework_JEE.product_category.query.ProductCategoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
