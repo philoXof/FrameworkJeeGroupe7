@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public class SlotQuery {
-    @Autowired
-    SlotRepository slotRepository;
+    private final SlotRepository slotRepository;
 
+    @Autowired
     public SlotQuery(SlotRepository slotRepository) {
         this.slotRepository = slotRepository;
     }

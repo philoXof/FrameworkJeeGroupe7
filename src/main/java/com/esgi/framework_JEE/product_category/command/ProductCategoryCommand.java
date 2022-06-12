@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.product_category.command;
 
+
 import com.esgi.framework_JEE.product_category.validation.ProductCategoryValidation;
 import com.esgi.framework_JEE.product_category.web.request.ProductCategoryRequest;
 import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;

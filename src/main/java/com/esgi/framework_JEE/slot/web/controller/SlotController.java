@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.slot.web.controller;
 
+
 import com.esgi.framework_JEE.slot.web.request.SlotRequest;
 import com.esgi.framework_JEE.slot.web.response.SlotResponse;
 import com.esgi.framework_JEE.slot.command.SlotCommand;

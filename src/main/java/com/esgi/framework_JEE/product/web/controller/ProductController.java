@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.product.web.controller;
 
+
 import com.esgi.framework_JEE.product.web.request.ProductRequest;
 import com.esgi.framework_JEE.product.web.command.ProductCommand;
 import com.esgi.framework_JEE.product.domain.entities.Product;
@@ -48,19 +49,6 @@ public class ProductController {
         return product;
     }
 
- /*   *//*
-    @GetMapping("/")
-    @ResponseBody
-    public Iterable<Product> getAllproducts(@RequestParam(required = false) ProductRequest filters) {
-        *//*return productQuery.getProducts();*//*
-        ProductCategory productCategory = filters.productCategoryId != null ?
-                productCategoryQuery.getById(filters.productCategoryId)
-                : null;
-        Double price = filters.price;
-        String nutriscore = filters.nutriscore;
-        String name = filters.name;
-        return productQuery.getFilteredProducts(productCategory, price, nutriscore, name);
-    }*/
 
     /**
      * Read - Get all products
@@ -68,15 +56,13 @@ public class ProductController {
      */
     @GetMapping("/")
     @ResponseBody
-    public Iterable<Product> getAllproducts()
-       /*     @RequestParam(required = false) Integer category_id,
-            @RequestParam(required = false) Double price,
-            @RequestParam(required = false)  String nutriscore,
-            @RequestParam(required = false) String name)*/
+    public Iterable<Product> getAllproducts(
+            @RequestBody ProductRequest productRequest)
     {
-        return productQuery.getProducts();
-        /*ProductCategory productCategory = category_id != null ? productCategoryQuery.getById(category_id) : null;
-        return productQuery.getFilteredProducts(productCategory, price, nutriscore, name);*/
+        ProductCategory productCategory = productRequest.productCategoryId != null ? productCategoryQuery.getById(productRequest.productCategoryId) : null;
+        System.out.println("Here i am " + productRequest.name);
+        return productQuery.getFilteredProducts(productCategory, productRequest.price, productRequest.nutriscore, productRequest.name);
+
     }
     /*
     TODO Later add the filter version

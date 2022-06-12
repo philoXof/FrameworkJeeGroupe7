@@ -28,6 +28,7 @@ class UserControllerTest {
         RestAssured.port = port;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
 
+
         user1.email= TestFixtures.randomEmail();
         user1.firstname = "lucas";
         user1.lastname = "jehanno";
@@ -37,6 +38,7 @@ class UserControllerTest {
         user2.firstname = "kelyan";
         user2.lastname = "bervin";
         user2.password = "j aime les pates";
+
 
         user3.email = TestFixtures.randomEmail();
         user3.firstname = "halimatou";
@@ -141,6 +143,7 @@ class UserControllerTest {
         /*
          * CHANGE EMAIL
          */
+
         user1.email = TestFixtures.randomEmail();
         var updatedEmailUserResponse = UserFixture.changeEmail(id,user1)
                 .then()
@@ -213,6 +216,7 @@ class UserControllerTest {
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
+
         user3.email = TestFixtures.randomEmail();
         UserFixture.login(user3)
                 .then()

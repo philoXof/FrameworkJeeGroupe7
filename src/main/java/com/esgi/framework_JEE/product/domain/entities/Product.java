@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.product.domain.entities;
 
+
 import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;
 import com.esgi.framework_JEE.basket.domain.Basket;
 import com.esgi.framework_JEE.invoice.domain.Invoice;

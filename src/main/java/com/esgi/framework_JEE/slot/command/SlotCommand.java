@@ -1,5 +1,6 @@
 package com.esgi.framework_JEE.slot.command;
 
+
 import com.esgi.framework_JEE.slot.validation.SlotValidationService;
 import com.esgi.framework_JEE.slot.web.request.SlotRequest;
 import com.esgi.framework_JEE.slot.domain.entities.Slot;
@@ -38,6 +39,7 @@ public class SlotCommand {
         }
         return null;
     }
+
 
     public Slot changeEnd(int id,SlotRequest request) {
         Optional<Slot> dbSlot = Optional.ofNullable(slotRepository.findById(id));
