@@ -2,10 +2,10 @@ package com.esgi.framework_JEE.visited_product.web.controller;
 
 import com.esgi.framework_JEE.product.domain.entities.Product;
 import com.esgi.framework_JEE.product.web.query.ProductQuery;
+import com.esgi.framework_JEE.visited_product.web.command.VisitedProductCommand;
 import com.esgi.framework_JEE.user.Domain.entities.User;
 import com.esgi.framework_JEE.user.query.UserQuery;
 import com.esgi.framework_JEE.visited_product.domain.entities.VisitedProduct;
-import com.esgi.framework_JEE.visited_product.web.command.VisitedProductCommand;
 import com.esgi.framework_JEE.visited_product.web.query.VisitedProductQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
