@@ -1,10 +1,10 @@
 package com.esgi.framework_JEE.product.web.controller;
 
+
+import com.esgi.framework_JEE.product.web.request.ProductRequest;
 import com.esgi.framework_JEE.product.web.command.ProductCommand;
 import com.esgi.framework_JEE.product.domain.entities.Product;
 import com.esgi.framework_JEE.product.web.query.ProductQuery;
-import com.esgi.framework_JEE.product.web.request.ProductRequest;
-import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;
 import com.esgi.framework_JEE.product_category.query.ProductCategoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +49,7 @@ public class ProductController {
         return product;
     }
 
+
     /**
      * Read - Get all products
      * @return - An Iterable object of Product full filled
@@ -61,6 +62,7 @@ public class ProductController {
         ProductCategory productCategory = productRequest.productCategoryId != null ? productCategoryQuery.getById(productRequest.productCategoryId) : null;
         System.out.println("Here i am " + productRequest.name);
         return productQuery.getFilteredProducts(productCategory, productRequest.price, productRequest.nutriscore, productRequest.name);
+
     }
     /*
     TODO Later add the filter version

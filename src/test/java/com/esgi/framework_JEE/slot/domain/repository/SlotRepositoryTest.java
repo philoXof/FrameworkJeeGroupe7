@@ -1,6 +1,7 @@
 package com.esgi.framework_JEE.slot.domain.repository;
 
 import com.esgi.framework_JEE.slot.domain.entities.Slot;
+import com.esgi.framework_JEE.slot.domain.repository.SlotRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

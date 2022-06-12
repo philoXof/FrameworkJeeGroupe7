@@ -1,6 +1,7 @@
 package com.esgi.framework_JEE.product_category.validation;
 
 import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;
+import com.esgi.framework_JEE.product_category.validation.ProductCategoryValidation;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

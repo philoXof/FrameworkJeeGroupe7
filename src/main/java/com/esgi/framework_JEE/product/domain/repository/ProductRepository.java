@@ -1,7 +1,8 @@
 package com.esgi.framework_JEE.product.domain.repository;
 
-import com.esgi.framework_JEE.product.domain.entities.Product;
+
 import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;
+import com.esgi.framework_JEE.product.domain.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

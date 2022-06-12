@@ -1,6 +1,7 @@
 package com.esgi.framework_JEE.product_category.domain.repository;
 
 import com.esgi.framework_JEE.product_category.domain.entities.ProductCategory;
+import com.esgi.framework_JEE.product_category.domain.repository.ProductCategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

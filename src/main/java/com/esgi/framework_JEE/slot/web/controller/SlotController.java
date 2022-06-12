@@ -1,10 +1,11 @@
 package com.esgi.framework_JEE.slot.web.controller;
 
+
+import com.esgi.framework_JEE.slot.web.request.SlotRequest;
+import com.esgi.framework_JEE.slot.web.response.SlotResponse;
 import com.esgi.framework_JEE.slot.command.SlotCommand;
 import com.esgi.framework_JEE.slot.domain.entities.Slot;
 import com.esgi.framework_JEE.slot.query.SlotQuery;
-import com.esgi.framework_JEE.slot.web.request.SlotRequest;
-import com.esgi.framework_JEE.slot.web.response.SlotResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
