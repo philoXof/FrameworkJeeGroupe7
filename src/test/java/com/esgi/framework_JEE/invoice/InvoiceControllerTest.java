@@ -2,11 +2,11 @@ package com.esgi.framework_JEE.invoice;
 
 
 import com.esgi.framework_JEE.TestFixtures;
-import com.esgi.framework_JEE.use_case.invoice.domain.Invoice;
-import com.esgi.framework_JEE.use_case.invoice.infrastructure.web.response.InvoiceResponse;
-import com.esgi.framework_JEE.use_case.user.Domain.entities.User;
-import com.esgi.framework_JEE.use_case.user.web.controller.UserFixture;
-import com.esgi.framework_JEE.use_case.user.web.request.UserRequest;
+import com.esgi.framework_JEE.invoice.domain.Invoice;
+import com.esgi.framework_JEE.invoice.infrastructure.web.response.InvoiceResponse;
+import com.esgi.framework_JEE.user.Domain.entities.User;
+import com.esgi.framework_JEE.user.web.controller.UserFixture;
+import com.esgi.framework_JEE.user.web.request.UserRequest;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.RequestLoggingFilter;
