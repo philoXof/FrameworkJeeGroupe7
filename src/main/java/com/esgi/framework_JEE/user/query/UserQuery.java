@@ -30,6 +30,10 @@ public class UserQuery {
         return userRepository.findByEmail(mail) != null;
     }
 
+    public User getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     public User getByEmailAndPassword(String email, String password){
         return userRepository.findUserByEmailAndPassword(email, password);
     }
