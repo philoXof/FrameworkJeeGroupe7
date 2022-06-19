@@ -8,17 +8,25 @@ import com.esgi.framework_JEE.user.query.UserQuery;
 import com.esgi.framework_JEE.user.validation.UserValidationService;
 import com.esgi.framework_JEE.user.web.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 @Service
-public final class UserCommand {
+public final class UserCommand implements UserDetailsService {
     final
     UserRepository userRepository;
     final
     UserQuery userQuery;
 
-    UserValidationService userValidationService = new UserValidationService();
+    private final UserValidationService userValidationService = new UserValidationService();
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserCommand(UserRepository userRepository, UserQuery userQuery) {
         this.userRepository = userRepository;
@@ -33,6 +41,9 @@ public final class UserCommand {
         user.setPassword(userRequest.password);
         if (!userValidationService.isUserValid(user))
             return null;
+        user.setPassword(
+                passwordEncoder.encode(userRequest.password)
+        );
         return userRepository.save(user);
     }
 
@@ -42,8 +53,13 @@ public final class UserCommand {
         if(dbUser.isPresent()){
             var user = dbUser.get();
             user.setPassword(userRequest.password);
-            if(userValidationService.isUserValid(user))
+            if(userValidationService.isUserValid(user)){
+                user.setPassword(
+                        passwordEncoder.encode(userRequest.password)
+                );
                 return userRepository.save(user);
+            }
+
         }
         return null;
     }
@@ -86,5 +102,13 @@ public final class UserCommand {
     public void delete(int userId) {
         Optional<User> userFromDb = Optional.ofNullable(userRepository.findById(userId));
         userFromDb.ifPresent(userRepository::delete);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getPermission().getTitlePermission()));
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),authorities);
     }
 }
