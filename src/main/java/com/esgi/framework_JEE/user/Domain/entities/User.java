@@ -1,5 +1,7 @@
 package com.esgi.framework_JEE.user.Domain.entities;
 import javax.persistence.*;
+
+import com.esgi.framework_JEE.role.domain.entity.Role;
 import lombok.*;
 
 @Getter
@@ -28,4 +30,8 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permission")
+    private Role permission;
 }
