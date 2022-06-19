@@ -34,17 +34,14 @@ public class ApiApplication extends SpringBootServletInitializer {
 			System.out.println(role_ADMIN.getTitlePermission());
 			System.out.println("----------------------------");
 
-			var saved_user1 = userRepository.save(createUser("David","Arnaud","david@hotmail.fr","coucou1234"));
-			var saved_user2 = userRepository.save(createUser("Lucas","Jehanno","lucas@hotmail.fr","azerty1234"));
-			var saved_user3 = userRepository.save(createUser("Test","Test","test@test.fr","test1234test"));
+			var saved_user1 = userRepository.save(createUser("Lucas","Jehanno","lucas@hotmail.fr","azerty1234"));
+			var saved_user2 = userRepository.save(createUser("Test","Test","test@test.fr","test1234test"));
 
 
 			saved_user1.setPermission(role_ADMIN);
-			saved_user2.setPermission(role_ADMIN);
-			saved_user3.setPermission(role_USER);
+			saved_user2.setPermission(role_USER);
 			userRepository.save(saved_user1);
 			userRepository.save(saved_user2);
-			userRepository.save(saved_user3);
 
 
 
@@ -57,9 +54,6 @@ public class ApiApplication extends SpringBootServletInitializer {
 			System.out.println(saved_user2.getId());
 			System.out.println(saved_user2.getEmail());
 			System.out.println(saved_user2.getPermission().getTitlePermission());
-			System.out.println(saved_user3.getId());
-			System.out.println(saved_user3.getEmail());
-			System.out.println(saved_user3.getPermission().getTitlePermission());
 			System.out.println("----------------------------");
 
 
