@@ -207,6 +207,7 @@ class UserControllerTest {
 
     @Test
     public void should_test_login_route(){
+        //todo change with login to get token
         UserFixture.create(user3)
                 .then()
                 .statusCode(201)
