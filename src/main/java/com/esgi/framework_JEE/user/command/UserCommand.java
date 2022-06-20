@@ -104,7 +104,11 @@ public final class UserCommand implements UserDetailsService {
 
     public void delete(int userId) {
         Optional<User> userFromDb = Optional.ofNullable(userRepository.findById(userId));
-        userFromDb.ifPresent(userRepository::delete);
+        userFromDb.ifPresent(user -> {
+            user.setPermission(null);
+            userRepository.save(user);
+            userRepository.delete(user);
+        });
     }
 
     @Override
