@@ -2,12 +2,12 @@ package com.esgi.framework_JEE.user.command;
 
 
 
+import com.esgi.framework_JEE.role.application.query.RoleQuery;
 import com.esgi.framework_JEE.user.Domain.entities.User;
 import com.esgi.framework_JEE.user.Domain.repository.UserRepository;
 import com.esgi.framework_JEE.user.query.UserQuery;
 import com.esgi.framework_JEE.user.validation.UserValidationService;
 import com.esgi.framework_JEE.user.web.request.UserRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,12 +25,14 @@ public final class UserCommand implements UserDetailsService {
     final
     UserQuery userQuery;
 
+    final RoleQuery roleQuery;
     private final UserValidationService userValidationService = new UserValidationService();
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserCommand(UserRepository userRepository, UserQuery userQuery) {
+    public UserCommand(UserRepository userRepository, UserQuery userQuery, RoleQuery roleQuery) {
         this.userRepository = userRepository;
         this.userQuery = userQuery;
+        this.roleQuery = roleQuery;
     }
 
     public User create(UserRequest userRequest){
@@ -39,6 +41,7 @@ public final class UserCommand implements UserDetailsService {
         user.setFirstname(userRequest.firstname);
         user.setLastname(userRequest.lastname);
         user.setPassword(userRequest.password);
+        user.setPermission(roleQuery.getById(1)); //USER role (constant data on the starting app)
         if (!userValidationService.isUserValid(user))
             return null;
         user.setPassword(
