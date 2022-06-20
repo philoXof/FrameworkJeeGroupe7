@@ -53,11 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  */
                 .antMatchers(
                         HttpMethod.GET,
-                        "/**"
-                ).hasAnyAuthority("ADMIN")
-
-                .antMatchers(
-                        HttpMethod.GET,
                         "/api/v1/basket/**",
                         "/api/v1/basket/user/**",
                         "/api/v1/basket/",
@@ -78,17 +73,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/user/**",
                         "/user/"
                 ).hasAnyAuthority("ADMIN","USER")
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/**"
+                ).hasAnyAuthority("ADMIN")
 
                 /*
                     POST WITH TOKEN
                 */
-                .antMatchers(
-                        HttpMethod.POST,
-                        "/**",
-                        "/role/create",
-                        "/products/create",
-                        "/product_category/create"
-                ).hasAnyAuthority("ADMIN")
 
                 .antMatchers(
                         HttpMethod.POST,
@@ -99,9 +91,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/products/**/visited"
                 ).hasAnyAuthority("ADMIN","USER")
 
+                .antMatchers(
+                        HttpMethod.POST,
+                        "/**",
+                        "/role/create",
+                        "/products/create",
+                        "/product_category/create"
+                ).hasAnyAuthority("ADMIN")
+
                 /*
                     PUT WITH TOKEN
                 */
+                .antMatchers(
+                        HttpMethod.PUT,
+                        "/user/email/**",
+                        "/user/password/**"
+                ).hasAnyAuthority("ADMIN","USER")
+
                 .antMatchers(
                         HttpMethod.PUT,
                         "/user/email/**",
@@ -109,21 +115,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/products/**"
                 ).hasAnyAuthority("ADMIN")
 
-                .antMatchers(
-                        HttpMethod.PUT,
-                        "/user/email/**",
-                        "/user/password/**"
-                ).hasAnyAuthority("ADMIN","USER")
 
                 /*
                     PATCH WITH TOKEN
                 */
-                .antMatchers(
-                        HttpMethod.PATCH,
-                        "/product_category/**",
-                        "/role/**"
-                ).hasAnyAuthority("ADMIN")
-
                 .antMatchers(
                         HttpMethod.PATCH,
                         "/user/email/**",
@@ -134,9 +129,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/slot/end/**"
                 ).hasAnyAuthority("ADMIN","USER")
 
+                .antMatchers(
+                        HttpMethod.PATCH,
+                        "/product_category/**",
+                        "/role/**"
+                ).hasAnyAuthority("ADMIN")
+
                 /*
                     DELETE WITH TOKEN
                 */
+                .antMatchers(
+                        HttpMethod.DELETE,
+                        "/user/**",
+                        "/slot/**"
+                ).hasAnyAuthority("ADMIN", "USER")
+
                 .antMatchers(
                         HttpMethod.DELETE,
                         "/**",
@@ -145,13 +152,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/products/**",
                         "/product_category/**",
                         "/role/**"
-                ).hasAnyAuthority("ADMIN")
-
-                .antMatchers(
-                        HttpMethod.DELETE,
-                        "/user/delete/**",
-                        "/slot/**"
-                ).hasAnyAuthority("ADMIN", "USER");
+                ).hasAnyAuthority("ADMIN");
 
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
