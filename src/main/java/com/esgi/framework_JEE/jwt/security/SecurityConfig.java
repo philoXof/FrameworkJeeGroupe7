@@ -85,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.POST,
                 "/api/v1/basket/generate/**",
+                        "/api/v1/basket",
                         "/api/v1/invoice",
                         "/api/v1/invoice/generate/**",
                         "/slot/create",
@@ -96,7 +97,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**",
                         "/role/create",
                         "/products/create",
-                        "/product_category/create"
+                        "/product_category/create",
+                        "/**"
                 ).hasAnyAuthority("ADMIN")
 
                 /*
@@ -112,7 +114,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         HttpMethod.PUT,
                         "/user/email/**",
                         "/user/password/**",
-                        "/products/**"
+                        "/products/**",
+                        "/**"
                 ).hasAnyAuthority("ADMIN")
 
 
@@ -132,7 +135,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.PATCH,
                         "/product_category/**",
-                        "/role/**"
+                        "/role/**",
+                        "/**"
                 ).hasAnyAuthority("ADMIN")
 
                 /*
@@ -151,7 +155,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/v1/invoice/**",
                         "/products/**",
                         "/product_category/**",
-                        "/role/**"
+                        "/role/**",
+                        "/**"
                 ).hasAnyAuthority("ADMIN");
 
         http.addFilter(customAuthenticationFilter);
