@@ -3,6 +3,7 @@ package com.esgi.framework_JEE.user.web.controller;
 import com.esgi.framework_JEE.TestFixtures;
 import com.esgi.framework_JEE.Token;
 import com.esgi.framework_JEE.TokenFixture;
+import com.esgi.framework_JEE.user.Domain.entities.User;
 import com.esgi.framework_JEE.user.web.request.UserRequest;
 import com.esgi.framework_JEE.user.web.response.UserResponse;
 import io.restassured.RestAssured;
@@ -208,6 +209,31 @@ class UserControllerTest {
                 .extract().body().asString();
 
         assertThat(response3).isEqualTo("");
+
+    }
+
+
+    @Test
+    public void should_test_get_by_email(){
+        var created = UserFixture.create(user3)
+                .then()
+                .statusCode(201)
+                .extract().body().jsonPath().getObject(".", UserResponse.class);
+        var token = TokenFixture.getToken(user3);
+        var get = UserFixture.getByEmail(user3.email, token)
+                .then()
+                .statusCode(200)
+                .extract().body().jsonPath().getObject(".", UserResponse.class);
+        assertThat(created.email).isEqualTo(get.email);
+        assertThat(created.firstname).isEqualTo(get.firstname);
+        assertThat(created.lastname).isEqualTo(get.lastname);
+        assertThat(created.id).isEqualTo(get.id);
+
+
+        UserFixture.getByEmail("email qui existe pas et qui n est meme aps valide :')", token)
+                .then()
+                .statusCode(404);
+
 
     }
 
