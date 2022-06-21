@@ -46,7 +46,6 @@ public class BasketControllerTest {
 
     @Test
     public void shouldGenerateBasketWithUserId(){
-
         var user = UserFixture.create(userRequest)
                 .then()
                 .statusCode(201)
@@ -54,12 +53,14 @@ public class BasketControllerTest {
 
         var token = TokenFixture.getToken(userRequest);
 
-        var location = BasketFixtures.generateInvoice(user.getId())
+        var location = BasketFixtures.generateInvoice(user.getId(),token)
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
 
-        var basketResponse = when()
+        var basketResponse = given()
+                .header("Authorization","Bearer "+token.access_token)
+                .when()
                 .get(location)
                 .then()
                 .statusCode(302)
@@ -78,16 +79,26 @@ public class BasketControllerTest {
         userRequest.email = TestFixtures.randomEmail();
         userRequest.password = "mot de passe";
 
-        var locationBasketCreated = BasketFixtures.create()
+        var token = TokenFixture.userToken();
+        var locationBasketCreated = BasketFixtures.create(token)
                 .then()
                 .statusCode(201)
                 .extract().header("Location");
 
-        when()
+        //user cannot delete basket
+        given()
+                .header("Authorization","Bearer "+token.access_token)
+                .when()
+                .delete(locationBasketCreated)
+                .then()
+                .statusCode(403);
+
+        given()
+                .header("Authorization","Bearer "+TokenFixture.adminToken().access_token)
+                .when()
                 .delete(locationBasketCreated)
                 .then()
                 .statusCode(200);
-
     }
 
     @Test
@@ -101,7 +112,10 @@ public class BasketControllerTest {
                 .extract().body().jsonPath().getObject(".", User.class);
 
 
+        var token = TokenFixture.getToken(userRequest);
         given()
+                .header("Authorization","Bearer "+token.access_token)
+                .given()
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/api/v1/basket/generate/" + user.getId())
@@ -109,6 +123,8 @@ public class BasketControllerTest {
                 .statusCode(201);
 
         given()
+                .header("Authorization","Bearer "+token.access_token)
+                .given()
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/api/v1/basket/generate/" + user.getId())
