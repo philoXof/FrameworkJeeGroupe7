@@ -2,6 +2,7 @@ package com.esgi.framework_JEE.basket;
 
 
 import com.esgi.framework_JEE.TestFixtures;
+import com.esgi.framework_JEE.TokenFixture;
 import com.esgi.framework_JEE.basket.infrastructure.web.response.BasketResponse;
 import com.esgi.framework_JEE.user.Domain.entities.User;
 import com.esgi.framework_JEE.user.web.controller.UserFixture;
@@ -51,6 +52,7 @@ public class BasketControllerTest {
                 .statusCode(201)
                 .extract().body().jsonPath().getObject(".", User.class);
 
+        var token = TokenFixture.getToken(userRequest);
 
         var location = BasketFixtures.generateInvoice(user.getId())
                 .then()
@@ -65,7 +67,7 @@ public class BasketControllerTest {
 
         assertThat(basketResponse.getUserId()).isEqualTo(user.getId());
 
-        UserFixture.deleteById(user.getId());
+        UserFixture.deleteById(user.getId(), token);
     }
 
 

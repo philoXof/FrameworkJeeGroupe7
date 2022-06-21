@@ -2,6 +2,7 @@ package com.esgi.framework_JEE.invoice;
 
 
 import com.esgi.framework_JEE.TestFixtures;
+import com.esgi.framework_JEE.TokenFixture;
 import com.esgi.framework_JEE.invoice.domain.Invoice;
 import com.esgi.framework_JEE.invoice.infrastructure.web.response.InvoiceResponse;
 import com.esgi.framework_JEE.user.Domain.entities.User;
@@ -50,6 +51,7 @@ public class InvoiceControllerTest {
                 .statusCode(201)
                 .extract().body().jsonPath().getObject(".", User.class);
 
+        var token = TokenFixture.getToken(userRequest);
 
         var location = InvoiceFixtures.generateInvoice(user.getId())
                 .then()
@@ -64,7 +66,7 @@ public class InvoiceControllerTest {
 
         assertThat(invoiceResponse.getUser_id()).isEqualTo(user.getId());
 
-        UserFixture.deleteById(user.getId());
+        UserFixture.deleteById(user.getId(), token);
     }
 
 
