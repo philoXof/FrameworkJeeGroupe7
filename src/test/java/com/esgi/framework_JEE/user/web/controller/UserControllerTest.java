@@ -1,6 +1,8 @@
 package com.esgi.framework_JEE.user.web.controller;
 
 import com.esgi.framework_JEE.TestFixtures;
+import com.esgi.framework_JEE.Token;
+import com.esgi.framework_JEE.TokenFixture;
 import com.esgi.framework_JEE.user.web.request.UserRequest;
 import com.esgi.framework_JEE.user.web.response.UserResponse;
 import io.restassured.RestAssured;
@@ -60,12 +62,14 @@ class UserControllerTest {
                 .statusCode(201)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
 
+
+
         UserFixture.create(user1)
                 .then()
                 .statusCode(400);
 
         var id = userResponse.getId();
-
+        var token = TokenFixture.getToken(user1);
 
         assertThat(userResponse.getEmail()).isEqualTo(user1.email);
         assertThat(userResponse.getFirstname()).isEqualTo(user1.firstname);
@@ -75,7 +79,7 @@ class UserControllerTest {
         /*
          * get by id
          */
-        var getUserResponse = UserFixture.getById(id)
+        var getUserResponse = UserFixture.getById(id, token)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
@@ -92,12 +96,12 @@ class UserControllerTest {
          * update (change lastname)
          */
         user1.lastname = "";
-        UserFixture.changeLastname(id,user1)
+        UserFixture.changeLastname(id,user1, token)
                 .then()
                 .statusCode(400);
 
         user1.lastname = "JEHANNO";
-        var updatedUserResponse = UserFixture.changeLastname(id,user1)
+        var updatedUserResponse = UserFixture.changeLastname(id,user1, token)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
@@ -111,12 +115,12 @@ class UserControllerTest {
          * update (change firstname)
          */
         user1.firstname = "";
-        UserFixture.changeFirstname(id,user1)
+        UserFixture.changeFirstname(id,user1, token)
                 .then()
                 .statusCode(400);
 
         user1.firstname = "LUCAS";
-        var updatedFirstnameUserResponse = UserFixture.changeFirstname(id,user1)
+        var updatedFirstnameUserResponse = UserFixture.changeFirstname(id,user1, token)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
@@ -130,12 +134,12 @@ class UserControllerTest {
          * update (change password)
          */
         user1.password = "";
-        UserFixture.changePassword(id,user1)
+        UserFixture.changePassword(id,user1, token)
                 .then()
                 .statusCode(400);
 
         user1.password = "coucou c est mon nouveau mdp";
-        var updatedPasswordUserResponse = UserFixture.changePassword(id,user1)
+        var updatedPasswordUserResponse = UserFixture.changePassword(id,user1, token)
                 .then()
                 .statusCode(200);
 
@@ -145,7 +149,7 @@ class UserControllerTest {
          */
 
         user1.email = TestFixtures.randomEmail();
-        var updatedEmailUserResponse = UserFixture.changeEmail(id,user1)
+        var updatedEmailUserResponse = UserFixture.changeEmail(id,user1, token)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
@@ -158,7 +162,7 @@ class UserControllerTest {
         /*
          * delete
          */
-        var deleteUserResponse = UserFixture.deleteById(id)
+        var deleteUserResponse = UserFixture.deleteById(id, token)
                 .then()
                 .statusCode(202)
                 .extract().body().asString();
@@ -166,7 +170,7 @@ class UserControllerTest {
 
         assertThat(deleteUserResponse).isEqualTo("User " + id + " deleted");
 
-        deleteUserResponse = UserFixture.deleteById(id)
+        deleteUserResponse = UserFixture.deleteById(id, token)
                 .then()
                 .statusCode(400)
                 .extract().body().asString();
@@ -180,6 +184,8 @@ class UserControllerTest {
 
         user1.email = "";
 
+        var token = TokenFixture.userToken();
+
         var response = UserFixture.create(user1)
                 .then()
                 .statusCode(400)
@@ -189,14 +195,14 @@ class UserControllerTest {
         /*
          * get by id
          */
-        var response2 = UserFixture.getById(0)
+        var response2 = UserFixture.getById(0, token)
                 .then()
                 .statusCode(400)
                 .extract().body().asString();
 
         assertThat(response2).isEqualTo("");
 
-        var response3 = UserFixture.changeEmail(0,new UserRequest())
+        var response3 = UserFixture.changeEmail(0,new UserRequest(), token)
                 .then()
                 .statusCode(400)
                 .extract().body().asString();
@@ -207,21 +213,22 @@ class UserControllerTest {
 
     @Test
     public void should_test_login_route(){
-        //todo change with login to get token
         UserFixture.create(user3)
                 .then()
                 .statusCode(201)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
 
-        UserFixture.login(user3)
+        TokenFixture.login(user3)
                 .then()
                 .statusCode(200)
-                .extract().body().jsonPath().getObject(".", UserResponse.class);
+                .extract().body().jsonPath().getObject(".", Token.class);
 
-        user3.email = TestFixtures.randomEmail();
-        UserFixture.login(user3)
+        user3.email = "email qui n est pas le bon";
+        user3.password = "mdp qui n est pas le bon non plus";
+
+        TokenFixture.login(user3)
                 .then()
-                .statusCode(400)
+                .statusCode(403)
                 .extract().body().asString();
     }
 
@@ -236,7 +243,9 @@ class UserControllerTest {
                 .statusCode(201)
                 .extract().body().jsonPath().getObject(".", UserResponse.class);
 
-        var slotResponse = UserFixture.getAll()
+        var token = TokenFixture.getToken(user1);
+
+        var slotResponse = UserFixture.getAll(token)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getList(".", UserResponse.class);
