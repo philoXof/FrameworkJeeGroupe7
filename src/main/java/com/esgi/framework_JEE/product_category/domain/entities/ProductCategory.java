@@ -25,7 +25,4 @@ public class ProductCategory {
 
     @Column(name = "name")
     private String name;
-
-    @OneToMany
-    private List<Product> productList = new ArrayList<>();
 }
