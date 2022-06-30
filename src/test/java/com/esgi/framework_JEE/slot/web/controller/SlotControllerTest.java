@@ -186,6 +186,15 @@ public class SlotControllerTest {
 
         var slotRequest = new SlotRequest();
         slotRequest.start = "09/05/2022 09:00";
+        slotRequest.end = "10/05/2022 11:00";
+        var slotSize =  SlotFixtures.getByInterval(slotRequest, token)
+                .then()
+                .statusCode(200)
+                .extract().body().jsonPath().getList(".", SlotResponse.class);
+
+
+
+        slotRequest.start = "09/05/2022 09:00";
         slotRequest.end = "09/05/2022 10:00";
         slotRequest.user_id = 1;
 
@@ -230,7 +239,7 @@ public class SlotControllerTest {
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getList(".", SlotResponse.class);
-        assertThat(slotResponse).hasSize(2);
+        assertThat(slotResponse).hasSize(slotSize.size() + 2);
 
         slotResponse = SlotFixtures.getByUser(1, token)
                 .then()
