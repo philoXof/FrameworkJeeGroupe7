@@ -34,8 +34,8 @@ public class ApiApplication extends SpringBootServletInitializer {
 			System.out.println(role_ADMIN.getTitlePermission());
 			System.out.println("----------------------------");
 
-			var saved_user1 = userRepository.save(createUser("Lucass","Jehanno","lucass@hotmail.fr","azerty1234"));
-			var saved_user2 = userRepository.save(createUser("Test","Test","tesst@test.fr","test1234test"));
+			var saved_user1 = userRepository.save(createUser("Lucas","Jehanno","lucas@hotmail.fr","azerty1234"));
+			var saved_user2 = userRepository.save(createUser("Test","Test","test@test.fr","test1234test"));
 
 
 			saved_user1.setPermission(role_ADMIN);
